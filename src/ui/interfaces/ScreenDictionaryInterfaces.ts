@@ -15,7 +15,5 @@ export interface ScreenProps extends ScreenContainerProps {
 }
 
 export interface ScreenState {
-    screen: string,
-    connectionId: string,
-    agent_connected: boolean
+    [index: string]: any
 }

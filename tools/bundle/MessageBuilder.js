@@ -22,6 +22,7 @@ const messageMap = {
     QR_CONNECTION_ERROR: "Errors.qr.connectionError",
     QR_NO_CONNECTION_NOTIFY: "Errors.qr.notConnected",
     QR_NOT_FOUND: "Errors.qr.noConnectionFound",
+    NO_EMAIL: "Errors.email.noInput",
     // QR Code
     RETRIEVING_QR: "QR.text.retrieving",
     SCAN_QR: "QR.text.scanQR",
@@ -30,6 +31,8 @@ const messageMap = {
     // User Details
     EXPORT_PROFILE: "UserDetails.buttons.exportProfile",
     PRINT_PROFILE: "UserDetails.buttons.printProfile",
+    // Email
+    EMAIL_INSTRUCTIONS: "Email.text.instructions"
 };
 
 class MessageBuilder {

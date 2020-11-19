@@ -1,6 +1,6 @@
 {
     "DeployKeys": {
-        "title": "Community Bank",
+        "title": "Kiva",
         "authAgency": "Kiva HQ",
         "authAgencyAcronym": "Kiva"
     },
@@ -18,6 +18,9 @@
             "connectionError": "There was an error establishing a connection. Please try again and contact your IT department if the error persists.",
             "notConnected": "Please scan the QR code and establish a connection before you verify",
             "noConnectionFound": "Could not find a record of connection [ {{connectionId}} ]"
+        },
+        "email": {
+            "noInput": "Please enter your email in the field below"
         }
     },
     "ConfirmationScreen": {
@@ -45,6 +48,11 @@
         "buttons": {
             "exportProfile": "Export Profile",
             "printProfile": "Print Profile"
+        }
+    },
+    "Email": {
+        "text": {
+            "instructions": "Please enter your email"
         }
     }
 }

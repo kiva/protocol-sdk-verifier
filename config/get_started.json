@@ -2,7 +2,10 @@
     "headerImage": "kiva_small.jpeg",
     "locale": "en",
     "agent_port": "7567",
-    "controllerUrlBase": "http://localhost:3014",
+    "controllerUrlBase": "https://sandbox-gateway.protocol-prod.kiva.org",
+    "auth_endpoints": {
+        "SMS": "/v2/kyc/sms"
+    },
     "verification_options": [
         {
             "id": "Kiva_QR",
@@ -10,13 +13,16 @@
             "description": "Customer will use the Kiva Cloud Agent to establish a connection and provide credentials for proofs.",
             "guardian": false,
             "sequence": ["agency_qr"]
+        },
+        {
+            "id": "SMS_OTP",
+            "title": "SMS",
+            "description": "Customer will verify their identity using a one-time password delivered via text message.",
+            "guardian": false,
+            "sequence": ["email_input", "smsotp"]
         }
     ],
     "pii_map": {
-        "nationalId": {
-            "name": "National ID",
-            "rendered": true
-        },
         "firstName": {
             "name": "First Name",
             "rendered": true
@@ -25,15 +31,45 @@
             "name": "Last Name",
             "rendered": true
         },
-        "birthDate": {
-            "name": "Birth Date",
-            "rendered": true,
-            "wide": true
+        "companyEmail": {
+            "name": "Company Email",
+            "rendered": true
+        },
+        "hireDate": {
+            "name": "Hire Date",
+            "rendered": true
+        },
+        "currentTitle": {
+            "name": "Current Title",
+            "rendered": true
+        },
+        "team": {
+            "name": "Team",
+            "rendered": true
+        },
+        "officeLocation": {
+            "name": "Office Location",
+            "rendered": true
+        },
+        "type": {
+            "name": "Employment Type",
+            "rendered": true
+        },
+        "endDate": {
+            "name": "End Date",
+            "rendered": true
+        },
+        "phone": {
+            "name": "Phone",
+            "rendered": true
         },
         "photo~attach": {
-            "name": "Photo",
-            "alternateKey": "photoHash"
+            "name": "Photo"
         }
+    },
+    "phoneIntls": {
+        "only": false,
+        "countries": ["us"]
     },
     "env": {
         "prod": {
@@ -48,6 +84,7 @@
             "inherits": ["prod"]
         },
         "qa": {
+            "controllerUrlBase": "https://gateway.protocol-dev.kiva.org",
             "permittedOrigins": "http://localhost:8080,http://localhost:3000,https://www.kiva.org",
             "permittedIframeHosts": ["https://www.kiva.org", "http://localhost:3000", "http://localhost:8080"]
         },

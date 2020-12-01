@@ -20,12 +20,16 @@ export default class KivaAgent extends BaseAgent implements IAgent {
 
     constructor() {
         super();
+        const token = '';
         const config: any = {
-            baseURL: CONSTANTS.controllerUrlBase
+            baseURL: CONSTANTS.controllerUrlBase,
+            headers: {
+                "Authorization": `Bearer ${token}`,
+            }
         };
         const axiosConfig: AxiosRequestConfig = config;
         this.axiosInstance = axios.create(axiosConfig);
-        
+
     }
 
     isConnected(response: any): boolean {
@@ -59,7 +63,7 @@ export default class KivaAgent extends BaseAgent implements IAgent {
 
     establishConnection = async (ignore: string) => {
         return super.establish(
-            this.axiosInstance.post('/v2/kiva/api/connection', {}),
+            this.axiosInstance.post('/v2/kiva/api/connection', {},),
             (connection: any) => {
                 this._connectionId = connection.data.connection_id;
                 return btoa(JSON.stringify(connection.data.invitation));

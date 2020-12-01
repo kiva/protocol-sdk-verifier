@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "pro-cluster-kiva"
+  },
+  "targets": {
+    "pro-cluster-kiva": {
+      "hosting": {
+        "verifier": [
+          "pro-cluster-kiva-verify"
+        ]
+      }
+    }
+  }
+}

@@ -9,8 +9,8 @@
     "verification_options": [
         {
             "id": "Kiva_QR",
-            "title": "Kiva Cloud Agent",
-            "description": "Customer will use the Kiva Cloud Agent to establish a connection and provide credentials for proofs.",
+            "title": "Mobile Wallet",
+            "description": "Customer will use their wallet to establish a connection and provide credentials for proofs.",
             "guardian": false,
             "sequence": ["agency_qr"]
         },
@@ -61,6 +61,9 @@
         },
         "photo~attach": {
             "name": "Photo"
+        },
+        "Phone": {
+            "name": "Phone"
         }
     },
     "phoneIntls": {

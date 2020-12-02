@@ -20,7 +20,7 @@ export default class KivaAgent extends BaseAgent implements IAgent {
 
     constructor() {
         super();
-        const token = '';
+        const token = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ik5UQTRPRVJGUXpsQ1JVTkdRMEV6TXprNE56TTBOa014UlVSRFJUTkJRakU1UWpGQk5qUkNPUSJ9.eyJpc3MiOiJodHRwczovL2tpdmEtcHJvdG9jb2wtc3RhbmRhbG9uZS5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NWU3ZGYxOTc4YzNmZmMwY2JlMjIxOGI1IiwiYXVkIjpbImh0dHBzOi8va2l2YS1wcm90b2NvbC1zdGFuZGFsb25lLmF1dGgwLmNvbS9hcGkvdjIvIiwiaHR0cHM6Ly9raXZhLXByb3RvY29sLXN0YW5kYWxvbmUuYXV0aDAuY29tL3VzZXJpbmZvIl0sImlhdCI6MTYwNjgzNzI5MiwiZXhwIjoxNjA5NDI5MjkyLCJhenAiOiI5dTJZV09COUZQRWE2MjBDSHFBbVEwTEhqY1U5UlFnNiIsInNjb3BlIjoib3BlbmlkIHByb2ZpbGUgZW1haWwgYWRkcmVzcyBwaG9uZSByZWFkOmN1cnJlbnRfdXNlciB1cGRhdGU6Y3VycmVudF91c2VyX21ldGFkYXRhIGRlbGV0ZTpjdXJyZW50X3VzZXJfbWV0YWRhdGEgY3JlYXRlOmN1cnJlbnRfdXNlcl9tZXRhZGF0YSBjcmVhdGU6Y3VycmVudF91c2VyX2RldmljZV9jcmVkZW50aWFscyBkZWxldGU6Y3VycmVudF91c2VyX2RldmljZV9jcmVkZW50aWFscyB1cGRhdGU6Y3VycmVudF91c2VyX2lkZW50aXRpZXMiLCJndHkiOiJwYXNzd29yZCJ9.Y8kPe17yeym2obP1b4VselHZYTLUXIA4cYjn2IADSwDaSvX5RT5ubNeB-p69eU88pS0ZzU692KuAr1OvIOSzYnMQ3iXMLdt_bdojJknpBrPbLqzgzO_NnjbeMl91jr3XysiJDCufQVKxerEP4eAwNLoSytyNsmaeJc8ZTccUy-HQCNIhvqsQMPfAx_oB2R04cpE13nP-Wd7u8GO9q_ydVJL_TxhacgeG4cLfTvBTwbu718hCZNw4jcU0TN_cpbIhrN7zxwV7jgBzwuBO8lUspAuwNO5gFD4Wumsehz6qjrS5_kZ5Au9vY9uyFZik2sYa7LAtJqpwlMqeyHWlmWPgrw';
         const config: any = {
             baseURL: CONSTANTS.controllerUrlBase,
             headers: {
@@ -91,10 +91,11 @@ export default class KivaAgent extends BaseAgent implements IAgent {
     }
 
     sendVerification = async (connectionId: string): Promise<string> => {
+        debugger;
         return super.send(
             this.axiosInstance.post('/v2/kiva/api/verify', {
-                connection_id: this._connectionId,
-                proof_profile_path: "employee.proof.request.json"
+                connectionId: this._connectionId,
+                profile: "employee.proof.request.json"
             }),
             (verification: any) => {
                 this._verificationId = verification.data.presentation_exchange_id;

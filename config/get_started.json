@@ -59,8 +59,8 @@
             "name": "End Date",
             "rendered": true
         },
-        "phone": {
-            "name": "Phone",
+        "phoneNumber": {
+            "name": "Phone Number",
             "rendered": true
         },
         "photo~attach": {

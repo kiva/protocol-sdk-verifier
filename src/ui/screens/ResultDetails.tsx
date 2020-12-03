@@ -76,11 +76,11 @@ export default class ResultDetails extends React.Component<DetailsProps> {
           <img className="PictureProfile"
                alt=""
                src={"data:image;base64," + pictureData}/>
-          <Button
+          {false && <Button
             className="export-profile"
             onClick={this.props.exportAction}>
             {this.props.actionButtonCaption}
-          </Button>
+          </Button>}
           {this.renderFields(I18n.getKey('CREDENTIALING_AGENCY'), itemList)}
           <div className="important-buttons">
             <Button

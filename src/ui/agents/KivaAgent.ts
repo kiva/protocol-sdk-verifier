@@ -91,7 +91,6 @@ export default class KivaAgent extends BaseAgent implements IAgent {
     }
 
     sendVerification = async (connectionId: string): Promise<string> => {
-        debugger;
         return super.send(
             this.axiosInstance.post('/v2/kiva/api/verify', {
                 connectionId: this._connectionId,

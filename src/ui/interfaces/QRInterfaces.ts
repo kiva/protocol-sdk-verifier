@@ -10,11 +10,13 @@ export interface QRState {
     inviteUrl: string | undefined,
     connectionError: string,
     retrievingInviteUrl: boolean,
-    verifying: boolean
+    verifying: boolean,
+    isConnectionReady: boolean,
 }
 
 export interface QRButtonProps {
     onSubmit(): void,
     onClickBack(): void,
     onReset(): void
+    isConnectionReady: boolean,
 }

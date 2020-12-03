@@ -6,6 +6,11 @@
     padding-top: 15px;
 }
 
+.button-verify:disabled {
+    background: gray !important;
+    color: white !important;
+}
+
 #qr-loader {
     display: flex;
     justify-content: center;

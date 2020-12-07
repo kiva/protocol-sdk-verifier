@@ -66,7 +66,7 @@ export default class ResultDetails extends React.Component<DetailsProps> {
   }
 
   render() {
-    const pictureData: string = this.props.personalInfo.photoHash;
+    const pictureData: string = this.props.personalInfo["photo~attach"];
 
     return <Paper className="ProfileCardContainer"
                   elevation={1}>

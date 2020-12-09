@@ -14,13 +14,12 @@ export default class KivaAgent extends BaseAgent implements IAgent {
     private _connectionId?: string;
     private _verificationId?: string;
 
-    static init(): KivaAgent {
-        return new KivaAgent();
+    static init(token: string): KivaAgent {
+        return new KivaAgent(token);
     }
 
-    constructor() {
+    constructor(token: string) {
         super();
-        const token = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IlJrTXpRVEEyUkRrMVJqSTBOVEUyTlVZNU1rTkJRekF6TWtGRU4wSTROalk1T0RreVFqVkJNZyJ9.eyJpc3MiOiJodHRwczovL2tpdmEtcHJvdG9jb2wuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVlNDQ0OGJmZWQ0NmM0MGU3ZjkxMWQwMCIsImF1ZCI6WyJodHRwczovL2tpdmEtcHJvdG9jb2wuYXV0aDAuY29tL2FwaS92Mi8iLCJodHRwczovL2tpdmEtcHJvdG9jb2wuYXV0aDAuY29tL3VzZXJpbmZvIl0sImlhdCI6MTYwNzEwNzY3MywiZXhwIjoxNjA3MTk0MDczLCJhenAiOiI3TkhwVHl5SDZ5UlBQdTZ2T0NFZE5SU213T1BGS2tsRCIsInNjb3BlIjoib3BlbmlkIHByb2ZpbGUgZW1haWwgYWRkcmVzcyBwaG9uZSByZWFkOmN1cnJlbnRfdXNlciB1cGRhdGU6Y3VycmVudF91c2VyX21ldGFkYXRhIGRlbGV0ZTpjdXJyZW50X3VzZXJfbWV0YWRhdGEgY3JlYXRlOmN1cnJlbnRfdXNlcl9tZXRhZGF0YSBjcmVhdGU6Y3VycmVudF91c2VyX2RldmljZV9jcmVkZW50aWFscyBkZWxldGU6Y3VycmVudF91c2VyX2RldmljZV9jcmVkZW50aWFscyB1cGRhdGU6Y3VycmVudF91c2VyX2lkZW50aXRpZXMiLCJndHkiOiJwYXNzd29yZCJ9.iAvPZ4rk5r27ibgpqH1nVHhquXPGUDi5L8wPunGQa6eQbCZQHsVIyAByHkheNhSsw9weYWXXjkIoCOFDsA5JHvj99-lsDNUNfoZu5vweBB0rgQETOHyK2bEWy9Z-mYo5sz1wZ7n6LHiqd6fzG5J3nV3A98VmQ94395WBoRjVI2g6Q10HDfXVkwmUaQlY_XKLQWjNv8dW8mZz_RbCZXIbwdfHKdqdlcluoDE40FFcSY4iR2xoNoOXvAN-oDypGwpnrFv-gfFBKUqwDlyEmavVe8queNkpPqcwWjAuh81_XLNeaZimDuPFjEJnDkGpz-7g1W7_bd1X8H8mOLft84VBOw';
         const config: any = {
             baseURL: CONSTANTS.controllerUrlBase,
             headers: {

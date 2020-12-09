@@ -56,7 +56,7 @@ export default class AgencyQR extends React.Component<QRProps, QRState> {
                 return LocalAgent.init();
             case "Kiva_QR":
             default:
-                return KivaAgent.init();
+                return KivaAgent.init("auth0 access token here");
         }
     }
 

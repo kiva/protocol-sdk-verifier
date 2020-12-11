@@ -15,6 +15,7 @@ import {CONSTANTS} from "../../constants/constants";
 
 import I18n from '../utils/I18n';
 import GuardianSDK from '../utils/GuardianSDK';
+import auth from '../utils/AuthService';
 
 import {flowController} from "../KernelContainer";
 
@@ -26,7 +27,8 @@ import "../css/Common.scss";
 
 const SDK: GuardianSDK = GuardianSDK.init({
     endpoint: '/v2/kiva/api/guardian/verify',
-    auth_method: 'SMS'
+    auth_method: 'SMS',
+    token: auth.getToken()
 });
 
 export default class SMSOTPScreen extends React.Component<SMSProps, OTPState> {

@@ -12,7 +12,8 @@ export interface Constants {
     headerImage: string,
     controllerUrlBase: string,
     auth_endpoints?: EndpointsMap,
-    phoneIntls?: CountryCodeConfig
+    phoneIntls?: CountryCodeConfig,
+    permittedOpenerOrigins: string[]
 }
 
 export interface MessageMap {

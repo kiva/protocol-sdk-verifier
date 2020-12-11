@@ -40,7 +40,8 @@ class ConstantBuilder {
             'headerImage',
             'controllerUrlBase',
             'auth_endpoints',
-            'phoneIntls'
+            'phoneIntls',
+            'permittedOpenerOrigins'
         ];
         constants.forEach((c, idx) => {
             this.setVariable(c);

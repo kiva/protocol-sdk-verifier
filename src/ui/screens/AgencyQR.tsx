@@ -18,6 +18,7 @@ import {flowController} from "../KernelContainer";
 import I18n from '../utils/I18n';
 import LocalAgent from '../agents/LocalAgent';
 import KivaAgent from '../agents/KivaAgent';
+import auth from '../utils/AuthService';
 
 import "../css/Common.css";
 import "../css/QRScreen.css";
@@ -56,7 +57,7 @@ export default class AgencyQR extends React.Component<QRProps, QRState> {
                 return LocalAgent.init();
             case "Kiva_QR":
             default:
-                return KivaAgent.init("auth0 access token here");
+                return KivaAgent.init(auth.getToken());
         }
     }
 

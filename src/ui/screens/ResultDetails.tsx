@@ -8,7 +8,7 @@ import I18n from '../utils/I18n';
 
 import {CONSTANTS} from "../../constants/constants";
 
-import {DetailsProps} from "../interfaces/DetailsInterfaces";
+import {DetailsProps, PhotoAttach} from "../interfaces/DetailsInterfaces";
 import {PIImap} from "../interfaces/ConfirmationProps";
 
 const PII: PIImap = CONSTANTS.pii_map;
@@ -65,8 +65,21 @@ export default class ResultDetails extends React.Component<DetailsProps> {
     }
   }
 
+  createPhotoData(photoAttach: string): string {
+    let ret: string = "";
+    try {
+      const photoData: PhotoAttach = JSON.parse(photoAttach);
+      const {data, encoding, type} = photoData;
+      ret = `data:${type};${encoding},${data}`;
+    } catch {
+      ret = "data:image;base64," + photoAttach;
+    } finally {
+      return ret;
+    }
+  }
+
   render() {
-    const pictureData: string = this.props.personalInfo["photo~attach"];
+    const pictureData: string = this.createPhotoData(this.props.personalInfo["photo~attach"]);
 
     return <Paper className="ProfileCardContainer"
                   elevation={1}>
@@ -75,7 +88,7 @@ export default class ResultDetails extends React.Component<DetailsProps> {
           <h3>{I18n.getKey('EKYC_RECORD_TYPE')}</h3>
           <img className="PictureProfile"
                alt=""
-               src={"data:image;base64," + pictureData}/>
+               src={pictureData}/>
           {false && <Button
             className="export-profile"
             onClick={this.props.exportAction}>

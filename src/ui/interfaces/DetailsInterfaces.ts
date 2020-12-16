@@ -4,3 +4,9 @@ export interface DetailsProps {
     exportAction(): void,
     printButtonCaption: string
 }
+
+export interface PhotoAttach {
+    data: string,
+    type: string,
+    encoding: string
+}

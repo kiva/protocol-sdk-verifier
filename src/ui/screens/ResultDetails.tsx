@@ -72,7 +72,7 @@ export default class ResultDetails extends React.Component<DetailsProps> {
       const {data, encoding, type} = photoData;
       ret = `data:${type};${encoding},${data}`;
     } catch {
-      ret = "data:image;base64," + photoAttach;
+      ret = "data:image/png;base64," + photoAttach;
     } finally {
       return ret;
     }

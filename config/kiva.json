@@ -88,7 +88,7 @@
             "controllerUrlBase": "https://sandbox-gateway.protocol-prod.kiva.org",
             "permittedOrigins": "http://localhost:8080,http://localhost:3000,https://www.kiva.org",
             "permittedIframeHosts": ["https://www.kiva.org", "http://localhost:3000", "http://localhost:8080"],
-            "permittedOpenerOrigins": ["https://pro-cluster-kiva.web.app", "http://localhost:3000"],
+            "permittedOpenerOrigins": ["https://pro-cluster-kiva.web.app", "http://localhost:3000"]
         },
         "dev": {
             "inherits": ["qa"]

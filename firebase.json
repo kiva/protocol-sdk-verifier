@@ -2,7 +2,8 @@
   "hosting": [{
     "target": "verifier",
     "public": "build",
-    "predeploy": "npm run build",
+    "predeploy": "sh ./tools/bundle/create_bundle.sh config/kiva.json",
+    "postdeploy": "rm -rf build",
     "ignore": [
       "firebase.json",
       "**/.*",

@@ -1,4 +1,4 @@
-@import url("Reset.scss");
+@import url("Reset.css");
 @import url(~@blueprintjs/core/lib/css/blueprint.css);
 @import url(~@blueprintjs/icons/lib/css/blueprint-icons.css);
 sup {
@@ -80,14 +80,3 @@ footer {
       justify-content: space-evenly; }
       footer .layout .col {
         margin-bottom: 10px; } }
-
-.BankLogo {
-  background: url(/images/Ecobank_Logo_EN.png) no-repeat center center;
-  background-size: contain;
-  width: 100px;
-  height: 50px;
-  cursor: pointer;
-  opacity: 0.8; }
-
-.BankLogo:hover {
-  opacity: 1; }

@@ -20,12 +20,13 @@
     "noEmit": true,
     "noEmitOnError": true,
     "noImplicitAny": true,
-    "jsx": "react",
+    "jsx": "react-jsx",
     "rootDir": "src",
     "outDir": "build",
     "noImplicitReturns": true,
     "noImplicitThis": true,
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "noFallthroughCasesInSwitch": true
   },
   "include": [
     "src"

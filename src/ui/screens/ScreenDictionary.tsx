@@ -34,10 +34,6 @@ class Screen extends React.Component<ScreenProps, ScreenState> {
         }
     }
 
-    componentDidUpdate() {
-        console.log(this.state);
-    }
-
     setConnectionId = async (connectionId: string): Promise<void> => {
         this.setState({connectionId});
     };

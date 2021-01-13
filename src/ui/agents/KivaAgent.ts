@@ -26,6 +26,7 @@ export default class KivaAgent extends BaseAgent implements IAgent {
                 "Authorization": `Bearer ${token}`,
             }
         };
+
         const axiosConfig: AxiosRequestConfig = config;
         this.axiosInstance = axios.create(axiosConfig);
 
@@ -46,11 +47,11 @@ export default class KivaAgent extends BaseAgent implements IAgent {
         return false;
     }
 
-    formatProof(response: any): void {
+    formatProof(response: any): any {
         // TODO: Define an actual credential schema structure so that we can know that we're mapping data to actual PII map keys
         const proof: any = {};
         for (let key in response) {
-            let k: string = PII[key].alternateKey || key;
+            let k: string = PII[key]?.alternateKey! || key;
             proof[k] = response[key].raw;
         }
         return proof;

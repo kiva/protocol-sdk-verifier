@@ -20,7 +20,7 @@
     "noEmit": true,
     "noEmitOnError": true,
     "noImplicitAny": true,
-    "jsx": "react-jsx",
+    "jsx": "react",
     "rootDir": "src",
     "outDir": "build",
     "noImplicitReturns": true,

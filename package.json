@@ -47,6 +47,7 @@
     "wait-on": "^5.2.1"
   },
   "scripts": {
+    "postinstall": "sh ./tools/setup/setup-hooks.sh",
     "analyze-build": "source-map-explorer 'build/static/js/*.js'",
     "analyze": "npm-run-all -s build analyze-build",
     "compile": "tsc",

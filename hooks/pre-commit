@@ -1,0 +1,9 @@
+#!/bin/sh
+
+CI_CURRENT=$CI
+
+export CI=1
+
+npm run createQaBundle
+
+export CI=$CI_CURRENT

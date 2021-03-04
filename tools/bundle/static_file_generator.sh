@@ -3,6 +3,8 @@
 CONFIG_FILE=$1
 BUILD_TYPE=$2
 
+sh ./tools/setup/setup_hooks.sh
+
 # Because this is run from package.json, filepaths stem from the root directory
 if [ ! -d "./src/assets" ]; then
     echo "Creating src/assets directory..."

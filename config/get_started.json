@@ -29,10 +29,10 @@
     },
     "env": {
         "prod": {
-            "permittedOrigins": "https://www.kiva.org",
             "actions": {
                 "includeOnly": ["reset", "enableStandalone"]
             },
+            "permittedOrigins": "https://pro-cluster-kiva.web.app",
             "permittedIframeHosts": ["https://www.kiva.org"],
             "permittedOpenerOrigins": ["https://pro-cluster-kiva.web.app"],
             "isProd": true
@@ -42,7 +42,7 @@
         },
         "qa": {
             "controllerUrlBase": "https://sandbox-gateway.protocol-prod.kiva.org",
-            "permittedOrigins": "http://localhost:8080,http://localhost:3000,https://www.kiva.org",
+            "permittedOrigins": "http://localhost:8080,http://localhost:3000,https://pro-cluster-kiva.web.app",
             "permittedOpenerOrigins": ["https://pro-cluster-kiva.web.app", "http://localhost:3000"],
             "permittedIframeHosts": ["https://www.kiva.org", "http://localhost:3000", "http://localhost:8080"]
         },

@@ -22,6 +22,10 @@
         },
         "email": {
             "noInput": "Please enter your email in the field below"
+        },
+        "input": {
+            "missingPhoneNumber": "Please enter a valid phone number",
+            "invalidOTP": "Please provide the full six-digit passcode"
         }
     },
     "ConfirmationScreen": {

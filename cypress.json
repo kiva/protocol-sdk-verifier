@@ -6,7 +6,6 @@
     "video": false,
     "videosFolder": "test/videos",
     "supportFile": "test/support/index.js",
-    "experimentalNetworkStubbing": true,
     "env": {
         "MESSAGE_TARGET_ORIGIN": "*"
     },

@@ -29,7 +29,6 @@
     },
     "env": {
         "prod": {
-            "permittedOrigins": "https://www.kiva.org",
             "actions": {
                 "includeOnly": ["reset", "enableStandalone"]
             },

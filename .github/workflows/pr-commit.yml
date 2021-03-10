@@ -1,20 +1,19 @@
-name: build-commit
+name: Functional tests
 on:
   push:
     branches-ignore:
       - 'main'
 jobs:
-  compile_check:
+  cypress-run:
     timeout-minutes: 10
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@master
-      - name: Set up Node.js
-        uses: actions/setup-node@v1
+        uses: actions/checkout@v2
+      - name: Cypress functional tests
+        uses: cypress-io/github-action@v2
         with:
-          node-version: "10.x"
-      - name: "NPM install"
-        run: npm install
-      - name: "Bundle app"
-        run: npm run createQaBundle
+          build: npm run createQaBundle
+          start: npm run serve-build
+          config: baseUrl=http://localhost:5000
+          wait-on: 'http://localhost:5000'

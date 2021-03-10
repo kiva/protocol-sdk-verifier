@@ -34,3 +34,16 @@ Cypress.Commands.add("postActionMessage", (stateObject, waitPeriod) => {
         }
     });
 });
+
+Cypress.Commands.add("selectAuthMenuItem", () => {
+    cy.get('#auth_options .auth_option');
+});
+
+Cypress.Commands.add("otpInput", (inputCode) => {
+    let i = 0;
+    for (i; i < 6; i++) {
+        let selector = `[name="otp-digit-${i}"]`;
+
+        cy.get(selector).clear().type(inputCode[i]);
+    }
+})

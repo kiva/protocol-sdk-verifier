@@ -8,7 +8,14 @@ export default class BaseAgent implements IBaseAgent {
 
             return Promise.resolve(callback(connection));
         } catch (e) {
-            const msg: string = error || e.message;
+            let msg: string = "";
+            if (error) {
+                msg = error;
+            } else {
+                const errorDetails = ` (${e.response.data.code}: ${e.response.data.message})`;
+                msg = e.message + errorDetails;
+            }
+            console.error(error);
             return Promise.reject(msg);
         }
     }

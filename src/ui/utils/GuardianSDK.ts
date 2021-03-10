@@ -51,8 +51,10 @@ export default class GuardianSDK {
             return Promise.resolve(response.data);
         } catch (error) {
             console.log(error);
-
-            return Promise.reject(error.message);
+            const errorDetails = ` (${error.response.data.code}: ${error.response.data.message})`;
+            const msg: string = error.message + errorDetails;
+            console.error(error);
+            return Promise.reject(msg);
         } finally {
             this.cancel = null;
         }

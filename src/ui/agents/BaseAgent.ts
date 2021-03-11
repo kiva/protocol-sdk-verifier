@@ -1,4 +1,5 @@
 import {IBaseAgent} from "../interfaces/AgentInterfaces";
+import I18n from '../utils/I18n';
 
 export default class BaseAgent implements IBaseAgent {
 
@@ -8,15 +9,8 @@ export default class BaseAgent implements IBaseAgent {
 
             return Promise.resolve(callback(connection));
         } catch (e) {
-            let msg: string = "";
-            if (error) {
-                msg = error;
-            } else {
-                const errorDetails = ` (${e.response.data.code}: ${e.response.data.message})`;
-                msg = e.message + errorDetails;
-            }
-            console.error(error);
-            return Promise.reject(msg);
+            console.error(e);
+            return Promise.reject(this.determineErrorString(e, error));
         }
     }
 
@@ -34,5 +28,15 @@ export default class BaseAgent implements IBaseAgent {
 
     async prove(request: Promise<any>, callback: (data: any) => any, error?: string): Promise<any> {
         return this.baseFunction(request, callback, error);
+    }
+
+    determineErrorString(error: any, errorMsg?: string): string {
+        if (errorMsg) return errorMsg;
+
+        try {
+            return `${error.message} (${error.response.data.code}: ${error.response.data.message})`
+        } catch {
+            return error.hasOwnProperty('message') ? error.message : I18n.getKey('UNKNOWN_ERROR');
+        }
     }
 }

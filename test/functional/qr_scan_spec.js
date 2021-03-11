@@ -111,11 +111,12 @@ describe('QR Code Scan screen should...', function() {
         });
         cy.intercept(checkConf.method, checkConf.endpoint, {
             ...common,
-            delayMs: 1000,
-            body: checkConf.unverified
+            statusCode: 418,
+            delayMs: 200
         });
         cy.get('.next').click();
         cy.get('#qr-loader').should('be.visible');
+        cy.wait(201);
     });
 
     it('should should show an error if there\'s an error sending the proof request', function() {

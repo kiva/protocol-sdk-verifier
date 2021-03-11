@@ -6,7 +6,7 @@
     },
     "establishConnection": {
         "method": "POST",
-        "endpoint": "**/v2/kiva/api/connection",
+        "endpoint": "/v2/kiva/api/connection",
         "success": {
             "connection_id": "Tiberius",
             "invitation": {
@@ -21,7 +21,7 @@
     },
     "getConnection": {
         "method": "GET",
-        "endpoint": "**/v2/kiva/api/connection/**",
+        "endpoint": "/v2/kiva/api/connection/**",
         "inactive": {
             "state": "definitelyNotActive"
         },
@@ -31,14 +31,14 @@
     },
     "sendVerification": {
         "method": "POST",
-        "endpoint": "**/v2/kiva/api/verify",
+        "endpoint": "/v2/kiva/api/verify",
         "success": {
             "presentation_exchange_id": "Kiva"
         }
     },
     "checkVerification": {
         "method": "GET",
-        "endpoint": "**/v2/kiva/api/verify/**",
+        "endpoint": "/v2/kiva/api/verify/**",
         "unverified": {
             "state": "jinkies"
         },

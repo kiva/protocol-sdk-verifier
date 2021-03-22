@@ -28,6 +28,12 @@ First step is to install the NPM dependencies, which you can do from the root di
 npm install
 ```
 
+If you plan on contributing to this repo, we ask that you set up the Git hook scripts included in the `./hooks` directory in your local environment. This can be done by running:
+
+```
+npm run initHooks
+```
+
 Once that's done, you can build and serve a development version of the application using the `get_started` config file by running:
 
 ```

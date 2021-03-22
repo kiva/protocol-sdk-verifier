@@ -48,6 +48,7 @@
     "wait-on": "^5.2.0"
   },
   "scripts": {
+    "initHooks": "sh ./tools/setup/setup_hooks.sh",
     "analyze-build": "source-map-explorer 'build/static/js/*.js'",
     "analyze": "npm-run-all -s build analyze-build",
     "compile": "tsc",

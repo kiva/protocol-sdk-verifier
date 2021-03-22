@@ -15,24 +15,26 @@ describe('The User Details screen...', function() {
                 send = info.sendVerification,
                 verification = info.checkVerification;
 
-            cy.route2(establish.method, establish.endpoint, {
+            cy.intercept(establish.method, establish.endpoint, {
                 ...common,
                 body: establish.success
             });
-            cy.route2(connection.method, connection.endpoint, {
+            cy.intercept(connection.method, connection.endpoint, {
                 ...common,
                 body: connection.active
             });
-            cy.route2(send.method, send.endpoint, {
+            cy.intercept(send.method, send.endpoint, {
                 ...common,
                 body: send.success
             });
-            cy.route2(verification.method, verification.endpoint, {
+            cy.intercept(verification.method, verification.endpoint, {
                 ...common,
                 body: verification.verified
             });
             cy.visit('/');
             cy.get('.accept').click();
+            cy.wait(200);
+            cy.get('#select-auth-method').click();
             cy.wait(200);
             cy.get('[data-cy="qr-scan-next"]').click();
             cy.wait(500);
@@ -42,10 +44,6 @@ describe('The User Details screen...', function() {
     it('should render all the data from the credential', function() {
         let credentialData = [
             {
-                title: "National ID",
-                data: "CALLI0PE"
-            },
-            {
                 title: "First Name",
                 data: "Calliope"
             },
@@ -54,8 +52,36 @@ describe('The User Details screen...', function() {
                 data: "Gata"
             },
             {
-                title: "Birth Date",
+                title: "Company Email",
+                data: "cutest.kitty@kiva.org"
+            },
+            {
+                title: "Hire Date",
                 data: "2019-06-17"
+            },
+            {
+                title: "Current Title",
+                data: "Kiva's Cutest Kitty"
+            },
+            {
+                title: "Team",
+                data: "Kiva Protocol"
+            },
+            {
+                title: "Office Location",
+                data: "San Francisco"
+            },
+            {
+                title: "Employment Type",
+                data: "Full Time"
+            },
+            {
+                title: "End Date",
+                data: "NEVER!"
+            },
+            {
+                title: "Phone",
+                data: "867-5309"
             }
         ];
         cy.get('.ProfileItemContainer').should(el => {
@@ -73,12 +99,13 @@ describe('The User Details screen...', function() {
         cy.get('.PictureProfile').should(el => {
             expect(el.attr('src').indexOf('undefined')).to.eql(-1);
         });
-        // getting stuff prepped for the next test
-        initial = kycData;
-        cy.get('.export-profile').click();
+
+        // getting stuff prepped for the next test, if we decide to re-enable this functionality
+        // initial = kycData;
+        // cy.get('.export-profile').click();
     });
 
-    it('should export the user data correctly', function() {
+    it.skip('should export the user data correctly', function() {
         // Make sure the data IS different
         expect(initial.stamp === kycData.stamp).to.eql(false);
 

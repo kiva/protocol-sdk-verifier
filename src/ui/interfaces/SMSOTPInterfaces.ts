@@ -74,7 +74,7 @@ export interface SMSPostBody {
 
 interface GuardianData {
     pluginType: string,
-    filters: Filters,
+    filters: object,
     params: PhoneParams | OTPParams
 }
 
@@ -84,8 +84,4 @@ interface PhoneParams {
 
 interface OTPParams {
     otp: number
-}
-
-interface Filters {
-    govId1: string
 }

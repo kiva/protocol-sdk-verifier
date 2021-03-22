@@ -125,7 +125,9 @@ class PhoneNumberScreen extends React.Component<PhoneScreenProps, PhoneState> {
             guardianData: {
                 pluginType: 'SMS_OTP',
                 filters: {
-                    govId1: this.props.email
+                    externalIds: {
+                        companyEmail: this.props.email
+                    }
                 },
                 params: {
                     phoneNumber: this.state.phoneNumber
@@ -273,7 +275,9 @@ class OTPScreen extends React.Component<OTPScreenProps, OTPInputState> {
             guardianData: {
                 pluginType: 'SMS_OTP',
                 filters: {
-                    govId1: this.props.email
+                    externalIds: {
+                        companyEmail: this.props.email
+                    }
                 },
                 params: {
                     otp: this.getOtpValue()

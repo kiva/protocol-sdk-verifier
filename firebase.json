@@ -2,7 +2,6 @@
   "hosting": [{
     "target": "verifier",
     "public": "build",
-    "predeploy": "npm run build",
     "ignore": [
       "firebase.json",
       "**/.*",

@@ -1,9 +1,15 @@
 const infoFields = [
-    'National ID',
     'First Name',
     'Last Name',
-    'Birth Date',
-    'Photo'
+    'Company Email',
+    'Phone',
+    'Current Title',
+    'Team',
+    'Office Location',
+    'Employment Type',
+    'Photo',
+    'Hire Date',
+    'End Date'
 ];
 
 describe("The Confirmation Screen", () => {
@@ -35,10 +41,8 @@ describe("The Confirmation Screen", () => {
         });
     });
 
-    it('advances to the QR scan screen when user Accepts', () => {
+    it('advances to the Authentication Options Menu when user Accepts', () => {
         cy.contains('Accept').click();
-        cy.get('#Kiva_QR').should('be.visible');
-        // Stop polling once we verify
-        cy.get('.back').click();
+        cy.get('#auth_options').should('be.visible');
     });
 });

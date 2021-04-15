@@ -51,14 +51,36 @@ export CONF_FILE=path/to/your/config.json
 To create an optimized build package, we recommend you run the following command.
 
 ```
-npm run createQaBundle
+npm run build
 ```
 
 To serve the package locally, you can run
 
 ```
-serve -s build
+npm run serve-build
 ```
+
+## Creating a Production Bundle for Deployment
+
+This SDK is designed to support multiple deployments using just one codebase, with environment-specific variables [provided by a configuration file](https://github.com/kiva/protocol-sdk-verifier/tree/master/config).
+
+To run a deployment for a specific configuration file, you can run this command from the root directory of this repo.
+
+```
+sh ./tools/bundle/create_bundle.sh <YOUR CONFIG>
+```
+
+This will create a production bundle using `react-scripts` and will populate variables using the file specified by `<YOUR CONFIG>`.
+
+Configuration files also support custom environments, though at the moment we only support environments with the following names: `dev`, `qa`, `sandbox` and `prod`. (We are currently working on making this support less restrictive.)
+
+In order to build a bundle for a specific environment, you can run this command.
+
+```
+sh ./tools/bundle/create_bundle.sh <YOUR CONFIG> --<dev/sandbox/prod>
+```
+
+If no environment is specified, the default is `qa`.
 
 ## Tests
 

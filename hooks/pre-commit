@@ -4,6 +4,6 @@ CI_CURRENT=$CI
 
 export CI=1
 
-npm run createQaBundle
+npm run build
 
 export CI=$CI_CURRENT

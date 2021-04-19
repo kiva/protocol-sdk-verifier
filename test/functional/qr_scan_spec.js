@@ -140,10 +140,54 @@ describe('QR Code Scan screen should...', function() {
         cy.get('.dialog-icon.error').should('be.visible');
     });
 
-    it('should render user details if the proof is sucessful', function() {
-        let verifyConf = conf.sendVerification,
+    it('should show an error if the proof request is rejected', function() {
+        let establishConf = conf.establishConnection,
+            getConf = conf.getConnection,
+            establishResponseBody = establishConf.success,
+            connectResponseBody = getConf.active,
+            verifyConf = conf.sendVerification,
             checkConf = conf.checkVerification;
 
+        cy.intercept(establishConf.method, establishConf.endpoint, {
+            ...common,
+            body: establishResponseBody
+        });
+        cy.intercept(getConf.method, getConf.endpoint, {
+            ...common,
+            body: connectResponseBody
+        });
+        cy.intercept(verifyConf.method, verifyConf.endpoint, {
+            ...common,
+            body: verifyConf.success
+        });
+        cy.intercept(checkConf.method, checkConf.endpoint, {
+            ...common,
+            body: checkConf.rejected
+        });
+
+        cy.get('[data-cy="reset-flow"]').click();
+        cy.wait(300);
+        cy.get('[data-cy="qr-scan-next"]').click();
+        cy.get('.dialog-icon.error').should('be.visible');
+        cy.get('#instructions').should('contain', 'Verification Failed: This credential may have been revoked.');
+    });
+
+    it('should render user details if the proof is sucessful', function() {
+        let establishConf = conf.establishConnection,
+            getConf = conf.getConnection,
+            establishResponseBody = establishConf.success,
+            connectResponseBody = getConf.active,
+            verifyConf = conf.sendVerification,
+            checkConf = conf.checkVerification;
+
+        cy.intercept(establishConf.method, establishConf.endpoint, {
+            ...common,
+            body: establishResponseBody
+        });
+        cy.intercept(getConf.method, getConf.endpoint, {
+            ...common,
+            body: connectResponseBody
+        });
         cy.intercept(verifyConf.method, verifyConf.endpoint, {
             ...common,
             body: verifyConf.success
@@ -152,6 +196,9 @@ describe('QR Code Scan screen should...', function() {
             ...common,
             body: checkConf.verified
         });
+
+        cy.get('[data-cy="reset-flow"]').click();
+        cy.wait(300);
         cy.get('[data-cy="qr-scan-next"]').click();
         cy.get('.ProfileCard').should('be.visible');
     });

@@ -40,7 +40,14 @@ export default class KivaAgent extends BaseAgent implements IAgent {
     }
 
     isVerified(response: any): boolean {
-        if (response.state === "verified") {
+        if (response.state === "verified" && response.verified === true) {
+            return true;
+        }
+        return false;
+    }
+
+    isRejected(response: any): boolean {
+        if (response.state === "verified" && response.verified === false) {
             return true;
         }
         return false;

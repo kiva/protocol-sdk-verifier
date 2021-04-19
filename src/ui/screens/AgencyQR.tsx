@@ -113,6 +113,8 @@ export default class AgencyQR extends React.Component<QRProps, QRState> {
             let verificationStatus: any = await this.agent.checkVerification(verificationId);
             if (this.agent.isVerified(verificationStatus)) {
                 this.acceptProof(this.agent.getProof(verificationStatus));
+            } else if (!!this.agent.isRejected && this.agent.isRejected(verificationStatus)) {
+                throw I18n.getKey('REJECTED_PROOF');
             } else if (!cancel) {
                 setTimeout(() => {
                     this.pollVerification(verificationId);

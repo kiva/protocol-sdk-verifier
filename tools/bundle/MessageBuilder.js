@@ -26,6 +26,7 @@ const messageMap = {
     NO_EMAIL: "Errors.email.noInput",
     INVALID_PHONE_NUMBER_INPUT: "Errors.input.missingPhoneNumber",
     INVALID_OTP_ENTRY: "Errors.input.invalidOTP",
+    REJECTED_PROOF: "Errors.qr.rejectedProof",
     // QR Code
     CLICK_VERIFY: "QR.text.clickVerify",
     RETRIEVING_QR: "QR.text.retrieving",

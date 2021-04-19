@@ -15,5 +15,6 @@ export interface IAgent {
     isConnected(response: any): boolean,
     isVerified(response: any): boolean,
     getProof(response: any): any,
-    formatProof(response: any): any
+    formatProof(response: any): any,
+    isRejected?: (response: any) => boolean
 }

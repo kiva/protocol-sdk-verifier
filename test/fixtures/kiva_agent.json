@@ -42,8 +42,13 @@
         "unverified": {
             "state": "jinkies"
         },
+        "rejected": {
+            "state": "verified",
+            "verified": false
+        },
         "verified": {
             "state": "verified",
+            "verified": true,
             "presentation": {
                 "requested_proof": {
                     "revealed_attrs": {

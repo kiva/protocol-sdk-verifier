@@ -48,7 +48,7 @@
         },
         "verified": {
             "state": "verified",
-            "verified": true,
+            "verified": "true",
             "presentation": {
                 "requested_proof": {
                     "revealed_attrs": {

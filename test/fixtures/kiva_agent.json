@@ -44,7 +44,7 @@
         },
         "rejected": {
             "state": "verified",
-            "verified": false
+            "verified": "false"
         },
         "verified": {
             "state": "verified",

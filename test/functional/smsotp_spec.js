@@ -55,6 +55,7 @@ describe('The SMS/OTP authentication flow', () => {
         cy.get('[name="phoneNoInput"]').type("4158675309");
         cy.get('#sms-scan-verification-button').click();
         cy.get('[data-cy="sms-otp-in-progress"]').should('be.visible');
+        cy.wait(500);
     });
 
     it('successfully displays an error when a request fails', () => {

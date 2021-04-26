@@ -12,7 +12,6 @@ fi
 
 CONFIG_FILE=""
 DEPLOY_TARGET=qa
-CMD="npm run build"
 
 while [ "$1" != "" ]; do
     case $1 in
@@ -41,4 +40,6 @@ npm rebuild node-sass
 # Similar to problem in below Shell file, this will be run from root
 sh ./tools/bundle/static_file_generator.sh $CONFIG_FILE $DEPLOY_TARGET
 
-`echo $CMD`
+node node_modules/node-sass-chokidar/bin/node-sass-chokidar src/ -o src/
+
+node node_modules/react-scripts/bin/react-scripts build

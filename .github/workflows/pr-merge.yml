@@ -17,4 +17,4 @@ jobs:
       - name: "NPM install"
         run: npm install
       - name: "Bundle app"
-        run: npm run createQaBundle
+        run: npm run build

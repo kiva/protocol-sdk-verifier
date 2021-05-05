@@ -14,6 +14,7 @@ export default class ScreenContainer extends React.Component<ScreenContainerProp
             <Screen
                 screen={this.props.screen}
                 authMethod={this.props.authMethod}
+                profile={this.props.profile}
             />
         );
     }
@@ -62,6 +63,7 @@ class Screen extends React.Component<ScreenProps, ScreenState> {
                 setConnectionId={this.setConnectionId}
                 verifyConnection={this.verifyConnection}
                 connected={this.state.agent_connected}
+                profile={this.props.profile}
             />
         );
     }

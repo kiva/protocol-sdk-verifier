@@ -3,7 +3,8 @@ export interface QRProps {
     verifyConnection(established: boolean): Promise<void>,
     connectionId: string,
     connected: boolean,
-    agentType: string
+    agentType: string,
+    profile: string
 }
 
 export interface QRState {

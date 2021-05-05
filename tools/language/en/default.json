@@ -37,6 +37,10 @@
             "infoShareIncludes": "Information shared includes your:"
         }
     },
+    "VerificationRequirementScreen": {
+        "verificationRequired": "Verification Required",
+        "pleaseSelect": "Please select the requirement for verifying credentials"
+    },
     "AuthMenu": {
         "text": {
             "selectVerification": "Select a verification method"

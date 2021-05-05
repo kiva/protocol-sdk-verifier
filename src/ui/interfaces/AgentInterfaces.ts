@@ -1,6 +1,7 @@
 type TBaseAgentFunction = (request: Promise<any>, callback: (data: any) => any, error?: string) => Promise<any>;
 
 export interface IBaseAgent {
+    profiles: TBaseAgentFunction,
     establish: TBaseAgentFunction,
     check: TBaseAgentFunction,
     send: TBaseAgentFunction,
@@ -8,8 +9,9 @@ export interface IBaseAgent {
 }
 
 export interface IAgent {
+    fetchProofOptions(): Promise<any>,
     checkVerification(verificationId: string): Promise<any>,
-    sendVerification(connectionId: string): Promise<string>,
+    sendVerification(connectionId: string, profile: string): Promise<string>,
     establishConnection(connectionId: string): Promise<any>,
     getConnection(connectionId: string): Promise<any>,
     isConnected(response: any): boolean,

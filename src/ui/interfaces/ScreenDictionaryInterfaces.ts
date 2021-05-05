@@ -2,7 +2,8 @@ import {AuthOption} from "./AuthOptionInterfaces";
 
 export interface ScreenContainerProps {
     screen: string,
-    authMethod: AuthOption
+    authMethod: AuthOption,
+    profile:string
 }
 
 export interface ScreenContainerState {

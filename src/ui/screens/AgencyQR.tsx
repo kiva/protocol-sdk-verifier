@@ -152,7 +152,7 @@ export default class AgencyQR extends React.Component<QRProps, QRState> {
     verify = async () => {
         try {
             const id: string = this.settleConnectionId();
-            const verification: any = await this.agent.sendVerification(id);
+            const verification: any = await this.agent.sendVerification(id, this.props.profile);
             this.pollVerification(verification);
         } catch (e) {
             console.log(e);

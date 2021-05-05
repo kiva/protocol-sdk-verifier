@@ -64,6 +64,10 @@ export default class FlowController {
         // TODO: Clean this up
         if (this.use_menu) {
             template['confirmation'] = {
+                NEXT: 'verificationRequirement'
+            };
+            template['verificationRequirement'] = {
+                PREVIOUS: 'confirmation',
                 NEXT: 'menu'
             };
         }
@@ -87,7 +91,7 @@ export default class FlowController {
         if (this.use_menu) {
             folded[sequence[0]]['BACK'] = 'menu';
         } else {
-            folded[sequence[0]]['BACK'] = 'confirmation';
+            folded[sequence[0]]['BACK'] = 'verificationRequirement';
         }
 
         for (let i = 1; i <= sequence.length - 2; i++) {

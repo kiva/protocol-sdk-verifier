@@ -14,6 +14,10 @@ export default class BaseAgent implements IBaseAgent {
         }
     }
 
+    async profiles(request: Promise<any>, callback: (data: any) => any, error?: string): Promise<any> {
+        return this.baseFunction(request, callback, error);
+    }
+
     async establish(request: Promise<any>, callback: (data: any) => any, error?: string): Promise<any> {
         return this.baseFunction(request, callback, error);
     }

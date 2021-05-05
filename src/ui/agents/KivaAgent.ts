@@ -1,7 +1,7 @@
 import axios, { AxiosRequestConfig, AxiosInstance } from 'axios';
 import I18n from '../utils/I18n';
 import BaseAgent from './BaseAgent';
-
+import _ from 'lodash';
 import {IAgent} from '../interfaces/AgentInterfaces';
 import {CredentialKeyMap} from '../interfaces/ConfirmationProps';
 
@@ -29,6 +29,20 @@ export default class KivaAgent extends BaseAgent implements IAgent {
         const axiosConfig: AxiosRequestConfig = config;
         this.axiosInstance = axios.create(axiosConfig);
 
+    }
+
+    fetchProofOptions() {
+        return super.profiles(
+            this.axiosInstance.get('/v2/kiva/api/profiles/proofs', {},),
+            (profiles: any) => {
+                return _.map(profiles.data, (value, key) => {
+                    return {
+                        schema_id: key,
+                        ...value
+                    }
+                });
+            }
+        );
     }
 
     isConnected(response: any): boolean {
@@ -96,11 +110,11 @@ export default class KivaAgent extends BaseAgent implements IAgent {
         );
     }
 
-    sendVerification = async (connectionId: string): Promise<string> => {
+    sendVerification = async (connectionId: string, profile?: string): Promise<string> => {
         return super.send(
             this.axiosInstance.post('/v2/kiva/api/verify', {
                 connectionId: this._connectionId,
-                profile: CONSTANTS.credentialProof
+                profile: profile || CONSTANTS.credentialProof
             }),
             (verification: any) => {
                 this._verificationId = verification.data.presentation_exchange_id;

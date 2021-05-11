@@ -33,6 +33,8 @@ describe('The User Details screen...', function() {
             });
             cy.visit('/');
             cy.get('.accept').click();
+            cy.wait(2000);
+            cy.contains('Continue').click();
             cy.wait(200);
             cy.get('#select-auth-method').click();
             cy.wait(200);

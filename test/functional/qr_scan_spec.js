@@ -20,6 +20,8 @@ describe('QR Code Scan screen should...', function() {
         cy.intercept(testConf.method, testConf.endpoint, response);
         cy.visit('/');
         cy.get('.accept').click();
+        cy.wait(2000);
+        cy.contains('Continue').click();
         cy.get('#select-auth-method').click();
         cy.get('.dialog-icon.error').should('be.visible');
     });
@@ -169,7 +171,7 @@ describe('QR Code Scan screen should...', function() {
         cy.wait(300);
         cy.get('[data-cy="qr-scan-next"]').click();
         cy.get('.dialog-icon.error').should('be.visible');
-        cy.get('#instructions').should('contain', 'Verification Failed: This credential may have been revoked.');
+        cy.get('#instructions').should('contain', 'Verification Failed: This credential may have been revoked or it may not have been able to fulfill the proof request:');
     });
 
     it('should render user details if the proof is sucessful', function() {

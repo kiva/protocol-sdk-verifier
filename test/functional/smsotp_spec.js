@@ -2,6 +2,8 @@ describe('The SMS/OTP authentication flow', () => {
     before(() => {
         cy.visit('/');
         cy.get('.accept').click();
+        cy.wait(2000);
+        cy.contains('Continue').click();
         cy.selectAuthMenuItem().eq(1).click();
         cy.get('#select-auth-method').click();
     });

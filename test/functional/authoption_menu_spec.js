@@ -3,6 +3,7 @@ describe('The Authentication Options Menu screen', () => {
     before(() => {
         cy.visit('/');
         cy.contains('Accept').click();
+        cy.contains('Continue').click();
     });
 
     it('has two menu options for authenticating', () => {

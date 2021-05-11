@@ -36,6 +36,7 @@ export default class VerificationRequirementScreen extends React.Component<Verif
         this.setState({
             proofOptions: await this.agent.fetchProofOptions()
         });
+        this.props.setProfile(this.state.proofOptions[1]);
     }
 
     handleChange(event: React.ChangeEvent<{ value: unknown }>) {
@@ -77,6 +78,7 @@ export default class VerificationRequirementScreen extends React.Component<Verif
                     <FormControl className="form-control">
                         <InputLabel >Verification Requirement</InputLabel>
                         <Select
+                            className="verification-requirement-select"
                             value={this.state.verificationRequired}
                             onChange={this.handleChange.bind(this)}
                         >

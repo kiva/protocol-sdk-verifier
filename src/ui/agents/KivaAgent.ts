@@ -35,7 +35,7 @@ export default class KivaAgent extends BaseAgent implements IAgent {
 
     fetchProofOptions() {
         return super.profiles(
-            this.axiosInstance.get('/v2/kiva/api/profiles/proofs', {},),
+            this.axiosInstance.get('/v2/kiva/api/profiles/proofs', {}),
             (profiles: any) => {
                 return _.map(profiles.data, (value, key) => {
                     return {

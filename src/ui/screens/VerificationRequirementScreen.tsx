@@ -97,7 +97,7 @@ export default class VerificationRequirementScreen extends React.Component<Verif
                 <Grid item>
                     <Button
                         className="back"
-                        onClick={() => flowController.goTo('PREVIOUS')}>
+                        onClick={() => flowController.goTo('BACK')}>
                         {I18n.getKey('BACK')}
                     </Button>
                 </Grid>

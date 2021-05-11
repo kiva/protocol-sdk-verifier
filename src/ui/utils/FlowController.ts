@@ -67,7 +67,7 @@ export default class FlowController {
                 NEXT: 'verificationRequirement'
             };
             template['verificationRequirement'] = {
-                PREVIOUS: 'confirmation',
+                BACK: 'confirmation',
                 NEXT: 'menu'
             };
         }

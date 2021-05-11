@@ -25,7 +25,7 @@ The `IAgent` interface requires the following methods:
 
 * `establishConnection`: This asynchronous method accepts a connection ID string and returns a connection invitation object as a `Promise<any>`
 * `getConnection`: This asynchronous method accepts a connection ID string and returns a connection status object as a `Promise<any>`
-* `sendVerification`: This asynchronous method accepts a connection ID string and proof profile string and returns a verification ID string wrapped in a Promise
+* `sendVerification`: This asynchronous method accepts a connection ID string and proof profile object and returns a verification ID string wrapped in a Promise
 * `checkVerification`: This asynchronous method accepts a verification ID string and returns a verification status object as a `Promise<any>`
 * `isConnected`: This method accepts a connection status object and returns a boolean that indicates whether the connection is in an "Accepted" state.
 * `isVerified`: Similar to `isConnected`, this method accepts a verification status object and returns a boolean indicating whether the proof has succeeded.
@@ -122,7 +122,7 @@ isConnected(connectionStatus: any): boolean {
 ```
 ### `sendVerification(connectionId: string, profile: ProofRequestProfile): Promise<string>`
 
-This asynchronous method accepts the proof profile string and the connection ID from the invitation, starts a verification request and then returns the ID of the verification request wrapped in a Promise.
+This asynchronous method accepts the proof profile object and the connection ID from the invitation, starts a verification request and then returns the ID of the verification request wrapped in a Promise.
 
 If you're extending `BaseAgent`, this can be used in conjunction with `super.send()`.
 

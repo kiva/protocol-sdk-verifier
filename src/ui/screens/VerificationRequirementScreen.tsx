@@ -1,12 +1,15 @@
 import Grid from '@material-ui/core/Grid';
 import * as React from "react";
 
+// CSS
+import '../css/Common.scss';
+import '../css/VerificationRequirementScreen.scss';
+
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import I18n from '../utils/I18n';
 import { IAgent } from '../interfaces/AgentInterfaces';
 import KivaAgent from '../agents/KivaAgent';
-import LocalAgent from '../agents/LocalAgent';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
@@ -15,9 +18,6 @@ import {VerificationRequirementProps, VerificationRequirementState} from '../int
 import {flowController} from "../KernelContainer";
 import auth from '../utils/AuthService';
 import _ from 'lodash';
-
-import '../css/Common.css';
-import '../css/VerificationRequirementScreen.css';
 
 export default class VerificationRequirementScreen extends React.Component<VerificationRequirementProps, VerificationRequirementState> {
     public readonly agent: IAgent;

@@ -4,6 +4,8 @@ import BaseAgent from './BaseAgent';
 import _ from 'lodash';
 import {IAgent} from '../interfaces/AgentInterfaces';
 import {CredentialKeyMap} from '../interfaces/ConfirmationProps';
+import {ProofRequestProfile} from "../interfaces/VerificationRequirementProps";
+
 
 import {CONSTANTS} from '../../constants/constants';
 
@@ -110,11 +112,11 @@ export default class KivaAgent extends BaseAgent implements IAgent {
         );
     }
 
-    sendVerification = async (connectionId: string, profile?: string): Promise<string> => {
+    sendVerification = async (connectionId: string, profile: ProofRequestProfile): Promise<string> => {
         return super.send(
             this.axiosInstance.post('/v2/kiva/api/verify', {
                 connectionId: this._connectionId,
-                profile: profile || CONSTANTS.credentialProof
+                profile: profile.schema_id || CONSTANTS.credentialProof
             }),
             (verification: any) => {
                 this._verificationId = verification.data.presentation_exchange_id;

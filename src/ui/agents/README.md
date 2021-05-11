@@ -120,7 +120,7 @@ isConnected(connectionStatus: any): boolean {
     return false;
 }
 ```
-### `sendVerification(connectionId: string, profile: string): Promise<string>`
+### `sendVerification(connectionId: string, profile: ProofRequestProfile): Promise<string>`
 
 This asynchronous method accepts the proof profile string and the connection ID from the invitation, starts a verification request and then returns the ID of the verification request wrapped in a Promise.
 

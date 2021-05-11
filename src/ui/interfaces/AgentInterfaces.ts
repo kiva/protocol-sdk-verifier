@@ -11,7 +11,7 @@ export interface IBaseAgent {
 export interface IAgent {
     fetchProofOptions(): Promise<any>,
     checkVerification(verificationId: string): Promise<any>,
-    sendVerification(connectionId: string, profile: string): Promise<string>,
+    sendVerification(connectionId: string, profile: object): Promise<string>,
     establishConnection(connectionId: string): Promise<any>,
     getConnection(connectionId: string): Promise<any>,
     isConnected(response: any): boolean,

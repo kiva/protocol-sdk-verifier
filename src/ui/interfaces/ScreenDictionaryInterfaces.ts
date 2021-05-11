@@ -1,9 +1,10 @@
 import {AuthOption} from "./AuthOptionInterfaces";
+import {ProofRequestProfile} from "./VerificationRequirementProps";
 
 export interface ScreenContainerProps {
     screen: string,
     authMethod: AuthOption,
-    profile:string
+    profile: ProofRequestProfile
 }
 
 export interface ScreenContainerState {

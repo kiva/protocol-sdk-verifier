@@ -44,7 +44,7 @@ export default class VerificationRequirementScreen extends React.Component<Verif
         this.setState({
             verificationRequired: index
         })
-        this.props.setProfile(option.schema_id);
+        this.props.setProfile(option);
     };
 
     render() {

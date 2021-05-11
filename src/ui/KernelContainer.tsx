@@ -18,6 +18,7 @@ import FlowController from "./utils/FlowController";
 
 // Interfaces
 import {KernelProps, KernelState} from "./interfaces/KernelInterfaces";
+import {ProofRequestProfile} from "./interfaces/VerificationRequirementProps";
 
 // Constants
 import {actionList, CONSTANTS} from "../constants/constants";
@@ -82,7 +83,7 @@ export class KernelContainer extends React.Component<KernelProps, KernelState> {
         }, () => flowController.goTo('NEXT'));
     }
 
-    setProfile = (profile: string): void => {
+    setProfile = (profile: ProofRequestProfile): void => {
         this.setState({
             profile: profile
         });

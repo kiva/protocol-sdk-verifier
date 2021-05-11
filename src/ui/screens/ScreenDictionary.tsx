@@ -76,6 +76,7 @@ class Screen extends React.Component<ScreenProps, ScreenState> {
                 setSmsInfo={this.setSmsInfo}
                 smsSent={this.state.smsSent}
                 email={this.state.email}
+                profile={this.props.profile}
             />
         );
     }

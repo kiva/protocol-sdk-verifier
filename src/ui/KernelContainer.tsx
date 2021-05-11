@@ -39,7 +39,7 @@ export class KernelContainer extends React.Component<KernelProps, KernelState> {
             isLoading: true,
             personalInfo: "",
             isStandalone: false,
-            authIndex: 0,
+            authIndex: 0
         };
 
         flowController = FlowController.init(CONSTANTS.verification_options, this.go);

@@ -13,8 +13,12 @@ describe('The User Details screen...', function() {
                 establish = info.establishConnection,
                 connection = info.getConnection,
                 send = info.sendVerification,
-                verification = info.checkVerification;
-
+                verification = info.checkVerification,
+                fetchProofs = info.fetchProofOptions;
+            cy.intercept(fetchProofs.method, fetchProofs.endpoint, {
+                ...common,
+                body: fetchProofs.success
+            });
             cy.intercept(establish.method, establish.endpoint, {
                 ...common,
                 body: establish.success
@@ -33,7 +37,7 @@ describe('The User Details screen...', function() {
             });
             cy.visit('/');
             cy.get('.accept').click();
-            cy.wait(2000);
+            cy.wait(200);
             cy.contains('Continue').click();
             cy.wait(200);
             cy.get('#select-auth-method').click();

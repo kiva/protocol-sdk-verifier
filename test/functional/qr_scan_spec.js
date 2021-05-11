@@ -7,6 +7,10 @@ describe('QR Code Scan screen should...', function() {
         cy.fixture("kiva_agent.json").then(config => {
             conf = config;
             common = config.common;
+            cy.intercept(conf.fetchProofOptions.method, conf.fetchProofOptions.endpoint, {
+                ...common,
+                body: conf.fetchProofOptions.success
+            });
         });
     });
 
@@ -16,11 +20,10 @@ describe('QR Code Scan screen should...', function() {
                 statusCode: 418,
                 ...common
             };
-
         cy.intercept(testConf.method, testConf.endpoint, response);
         cy.visit('/');
         cy.get('.accept').click();
-        cy.wait(2000);
+        cy.wait(200);
         cy.contains('Continue').click();
         cy.get('#select-auth-method').click();
         cy.get('.dialog-icon.error').should('be.visible');

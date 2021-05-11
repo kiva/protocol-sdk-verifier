@@ -1,8 +1,16 @@
 describe('The SMS/OTP authentication flow', () => {
     before(() => {
+        cy.fixture("kiva_agent.json").then(info => {
+            let common = info.common,
+                fetchProofs = info.fetchProofOptions;
+            cy.intercept(fetchProofs.method, fetchProofs.endpoint, {
+                ...common,
+                body: fetchProofs.success
+            });
+        });
         cy.visit('/');
         cy.get('.accept').click();
-        cy.wait(2000);
+        cy.wait(200);
         cy.contains('Continue').click();
         cy.selectAuthMenuItem().eq(1).click();
         cy.get('#select-auth-method').click();

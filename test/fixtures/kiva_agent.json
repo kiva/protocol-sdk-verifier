@@ -4,6 +4,24 @@
             "Access-Control-Allow-Origin": "*"
         }
     },
+    "fetchProofOptions": {
+        "method": "GET",
+        "endpoint": "/v2/kiva/api/profiles/proofs",
+        "success": {
+            "demo.employee.proof.request.json": {
+                "comment": "Demo-issued employee credential",
+                "proof_request": {
+                    "name": "KivaIssuedEmployee"
+                }
+            },
+            "hiredate.after.proof.request.json": {
+                "comment": "Hire date after Jan 1 2018, employee attributes",
+                "proof_request": {
+                    "name": "HireDateAfterUnrestrictedEmployee"
+                }
+            }
+        }
+    },
     "establishConnection": {
         "method": "POST",
         "endpoint": "/v2/kiva/api/connection",

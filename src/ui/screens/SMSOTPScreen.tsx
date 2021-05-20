@@ -53,6 +53,7 @@ export default class SMSOTPScreen extends React.Component<SMSProps, OTPState> {
                 setContainerState={this.setContainerState}
                 smsSent={this.state.smsSent}
                 email={this.props.email}
+                profile={this.props.profile}
             />
         );
     }
@@ -64,6 +65,7 @@ export default class SMSOTPScreen extends React.Component<SMSProps, OTPState> {
                 email={this.props.email}
                 smsSent={this.state.smsSent}
                 setContainerState={this.setContainerState}
+                profile={this.props.profile}
             />
         );
     }
@@ -121,7 +123,7 @@ class PhoneNumberScreen extends React.Component<PhoneScreenProps, PhoneState> {
 
     setPhoneNumberRequestBody(): SMSPostBody {
         return {
-            profile: 'employee.proof.request.json',
+            profile: this.props.profile.schema_id,
             guardianData: {
                 pluginType: 'SMS_OTP',
                 filters: {
@@ -271,7 +273,7 @@ class OTPScreen extends React.Component<OTPScreenProps, OTPInputState> {
 
     setOTPPostBody(): SMSPostBody {
         return {
-            profile: 'employee.proof.request.json',
+            profile: this.props.profile.schema_id,
             guardianData: {
                 pluginType: 'SMS_OTP',
                 filters: {

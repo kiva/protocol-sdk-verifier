@@ -11,6 +11,7 @@ export class ScreenDispatcher extends React.Component<ScreenDispatcherProps> {
             <ScreenContainer
                 screen={this.props.screen}
                 authMethod={this.props.authMethod}
+                profile={this.props.profile}
             />
         );
     }

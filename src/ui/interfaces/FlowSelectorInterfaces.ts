@@ -1,6 +1,7 @@
 export interface Flow {
     [index: string]: PermittedNavigation | undefined,
     confirmation: PermittedNavigation,
+    verificationRequirement: PermittedNavigation,
     menu?: PermittedNavigation,
     authentication: PermittedNavigation
 }

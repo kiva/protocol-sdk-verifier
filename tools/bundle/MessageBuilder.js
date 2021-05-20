@@ -18,6 +18,9 @@ const messageMap = {
     AGREEMENT_2: "ConfirmationScreen.text.agreement-2",
     INFO_INCLUDES: "ConfirmationScreen.text.infoShareIncludes",
     REVIEW: "ConfirmationScreen.text.pleaseReview",
+    // Verification Requirement Screen
+    VERIFICATION_REQUIRED: "VerificationRequirementScreen.verificationRequired",
+    PLEASE_SELECT: "VerificationRequirementScreen.pleaseSelect",
     // Error Messages
     NO_INVITE_URL: "Errors.qr.noInviteUrl",
     QR_CONNECTION_ERROR: "Errors.qr.connectionError",

@@ -19,7 +19,7 @@
             "connectionError": "There was an error establishing a connection. Please try again and contact your IT department if the error persists.",
             "notConnected": "Please scan the QR code and establish a connection before you verify",
             "noConnectionFound": "Could not find a record of connection [ {{connectionId}} ]",
-            "rejectedProof": "Verification Failed: This credential may have been revoked."
+            "rejectedProof": "Verification Failed: This credential may have been revoked or it may not have been able to fulfill the proof request: \"{{proofRequestComment}}\""
         },
         "email": {
             "noInput": "Please enter your email in the field below"
@@ -36,6 +36,10 @@
             "agreement-2": "as part of the \"Know Your Customer\" verification.",
             "infoShareIncludes": "Information shared includes your:"
         }
+    },
+    "VerificationRequirementScreen": {
+        "verificationRequired": "Verification Required",
+        "pleaseSelect": "Please select the requirement for verifying credentials"
     },
     "AuthMenu": {
         "text": {

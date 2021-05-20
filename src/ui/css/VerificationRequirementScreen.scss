@@ -1,0 +1,20 @@
+@import "mixins/_fonts";
+@import "mixins/_colors";
+
+.VerificationRequirement {
+    &.screen {
+        h2 {
+            @include the-font;
+        }
+        .accept {
+            background: $primary-color;
+            color: $primary-offset;
+            margin: 10px;
+            @include the-font;
+        }
+    }
+}
+
+.MuiFormControl-root.form-control {
+  min-width: 200px;
+} 

@@ -13,6 +13,10 @@ export default class LocalAgent extends BaseAgent implements IAgent {
         return new LocalAgent();
     }
 
+    fetchProofOptions(): any {
+        return {};
+    }
+
     isConnected(response: any): boolean {
         if (response.status === "Connected") {
             return true;

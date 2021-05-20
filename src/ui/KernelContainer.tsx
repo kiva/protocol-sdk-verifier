@@ -6,6 +6,7 @@ import {ScreenDispatcher} from "./controllers/ScreenDispatcher";
 
 // Screens
 import ConfirmationScreen from './screens/ConfirmationScreen';
+import VerificationRequirementScreen from './screens/VerificationRequirementScreen';
 import ResultDetails from './screens/ResultDetails';
 import AuthenticationOptionMenu from './screens/AuthenticationOptionMenu';
 
@@ -17,6 +18,7 @@ import FlowController from "./utils/FlowController";
 
 // Interfaces
 import {KernelProps, KernelState} from "./interfaces/KernelInterfaces";
+import {ProofRequestProfile} from "./interfaces/VerificationRequirementProps";
 
 // Constants
 import {actionList, CONSTANTS} from "../constants/constants";
@@ -80,6 +82,12 @@ export class KernelContainer extends React.Component<KernelProps, KernelState> {
         }, () => flowController.goTo('NEXT'));
     }
 
+    setProfile = (profile: ProofRequestProfile): void => {
+        this.setState({
+            profile: profile
+        });
+    }
+
     dispatchEkycComplete = (): void => {
         const sendingObject = {
             key: 'kycCompleted',
@@ -139,6 +147,7 @@ export class KernelContainer extends React.Component<KernelProps, KernelState> {
             <ScreenDispatcher
                 screen={screen}
                 authMethod={CONSTANTS.verification_options[this.state.authIndex]}
+                profile={this.state.profile}
             />
         );
     }
@@ -161,6 +170,15 @@ export class KernelContainer extends React.Component<KernelProps, KernelState> {
         );
     }
 
+    renderVerificationRequirement() {
+        return (
+            <VerificationRequirementScreen
+                integrationName={I18n.getKey('SITE_TITLE')}
+                setProfile={this.setProfile}
+            />
+        )
+    }
+
     renderContent() {
         switch (this.state.step) {
         case 'menu':
@@ -171,6 +189,8 @@ export class KernelContainer extends React.Component<KernelProps, KernelState> {
             return this.renderLoadingScreen();
         case 'confirmation':
             return this.renderConfirmationScreen();
+        case 'verificationRequirement':
+            return this.renderVerificationRequirement();
         default:
             return this.renderScreen(this.state.step);
         }
@@ -205,6 +225,7 @@ export class KernelContainer extends React.Component<KernelProps, KernelState> {
 
 const screenNames: any = {
     confirmation: 'Consent',
+    verificationRequirement: 'VerificationRequirement',
     loading: 'AppLoad',
     details: 'CustomerInfo'
 };

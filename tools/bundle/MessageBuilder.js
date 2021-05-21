@@ -26,6 +26,7 @@ const messageMap = {
     QR_CONNECTION_ERROR: "Errors.qr.connectionError",
     QR_NO_CONNECTION_NOTIFY: "Errors.qr.notConnected",
     QR_NOT_FOUND: "Errors.qr.noConnectionFound",
+    PROOFS_ERROR: "Errors.proofs.fetchProofsError",
     NO_EMAIL: "Errors.email.noInput",
     INVALID_PHONE_NUMBER_INPUT: "Errors.input.missingPhoneNumber",
     INVALID_OTP_ENTRY: "Errors.input.invalidOTP",

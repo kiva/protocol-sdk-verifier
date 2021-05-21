@@ -21,6 +21,9 @@
             "noConnectionFound": "Could not find a record of connection [ {{connectionId}} ]",
             "rejectedProof": "Verification Failed: This credential may have been revoked or it may not have been able to fulfill the proof request: \"{{proofRequestComment}}\""
         },
+        "proofs": {
+            "fetchProofsError": "Failed to fetch available verification requirement options."
+        },
         "email": {
             "noInput": "Please enter your email in the field below"
         },

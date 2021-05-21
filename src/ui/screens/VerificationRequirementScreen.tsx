@@ -36,7 +36,7 @@ export default class VerificationRequirementScreen extends React.Component<Verif
         this.setState({
             proofOptions: await this.agent.fetchProofOptions()
         });
-        this.props.setProfile(this.state.proofOptions[1]);
+        this.props.setProfile(this.state.proofOptions[0]);
     }
 
     handleChange(event: React.ChangeEvent<{ value: unknown }>) {

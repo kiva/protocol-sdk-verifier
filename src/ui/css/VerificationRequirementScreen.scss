@@ -13,6 +13,13 @@
             @include the-font;
         }
     }
+    .pr-loader {
+        display: flex;
+        justify-content: center;
+    }
+    .loader-text {
+        margin-top: 10px;
+    }
 }
 
 .MuiFormControl-root.form-control {

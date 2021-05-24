@@ -5,7 +5,9 @@ export interface VerificationRequirementProps {
 
 export interface VerificationRequirementState {
   verificationRequired: number,
-  proofOptions: any[]
+  proofOptions: any[],
+  proofsLoading: boolean,
+  proofOptionsError: string
 } 
 
 export interface ProofRequestProfile {

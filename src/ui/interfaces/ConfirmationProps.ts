@@ -5,6 +5,7 @@ export interface ConfirmationProps {
 interface CredentialKeyDefinition {
     name: string,
     rendered?: boolean,
+    dataType: string,
     wide?: boolean,
     alternateKey?: string,
     alternateName?: string

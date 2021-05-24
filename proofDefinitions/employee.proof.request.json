@@ -1,45 +1,56 @@
 {
     "firstName": {
         "name": "First Name",
-        "rendered": true
+        "rendered": true,
+        "dataType": "text"
     },
     "lastName": {
         "name": "Last Name",
-        "rendered": true
+        "rendered": true,
+        "dataType": "text"
     },
     "companyEmail": {
         "name": "Company Email",
-        "rendered": true
+        "rendered": true,
+        "dataType": "text"
     },
     "hireDate": {
         "name": "Hire Date",
-        "rendered": true
+        "rendered": true,
+        "dataType": "date"
     },
     "currentTitle": {
         "name": "Current Title",
-        "rendered": true
+        "rendered": true,
+        "dataType": "text"
     },
     "team": {
         "name": "Team",
-        "rendered": true
+        "rendered": true,
+        "dataType": "text"
     },
     "officeLocation": {
         "name": "Office Location",
-        "rendered": true
+        "rendered": true,
+        "dataType": "text"
     },
     "type": {
         "name": "Employment Type",
-        "rendered": true
+        "rendered": true,
+        "dataType": "text"
     },
     "endDate": {
         "name": "End Date",
-        "rendered": true
+        "rendered": true,
+        "dataType": "date"
     },
     "photo~attach": {
-        "name": "Photo"
+        "name": "Photo",
+        "dataType": "photo~attach"
     },
     "phoneNumber": {
         "name": "Phone",
-        "rendered": true
+        "rendered": true,
+        "dataType": "text"
     }
 }

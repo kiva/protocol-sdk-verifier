@@ -7,7 +7,7 @@ import classNames from 'classnames';
 import I18n from '../utils/I18n';
 
 import {CONSTANTS} from "../../constants/constants";
-
+import _ from "lodash";
 import {DetailsProps, PhotoAttach} from "../interfaces/DetailsInterfaces";
 import {CredentialKeyMap} from "../interfaces/ConfirmationProps";
 
@@ -17,6 +17,26 @@ const wideKeys: string[] = [];
 const itemList: any = {};
 
 export default class ResultDetails extends React.Component<DetailsProps> {
+
+    getPIIDisplayString(key:string, val:string) {
+        try {
+            let piiString = val;
+            const dataKey = _.findKey(CredentialKeys, (item) => {return item.name === key});
+            if (dataKey && CredentialKeys[dataKey] && CredentialKeys[dataKey].dataType === "date") {
+                piiString = new Date(Number(val)).toLocaleDateString(
+                    'en-gb',
+                    {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                    }
+                );
+            }
+            return piiString;
+        } catch {
+            return I18n.getKey('noData');
+        }
+    }
 
     renderFields(title: string, fields: any) {
         this.processCredentialKeys();
@@ -40,7 +60,7 @@ export default class ResultDetails extends React.Component<DetailsProps> {
                             wide: wideItemKeys.indexOf(key) > -1
                         })}>
                     <div className="FieldCardTitle">{key}</div>
-                    <div className="FieldCardValue">{value}</div>
+                    <div className="FieldCardValue">{this.getPIIDisplayString(key, value)}</div>
                 </div>
             );
         }

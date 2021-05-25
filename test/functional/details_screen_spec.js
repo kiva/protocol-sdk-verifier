@@ -63,7 +63,8 @@ describe('The User Details screen...', function() {
             },
             {
                 title: "Hire Date",
-                data: "2019-06-17"
+                data: "2019-06-17",
+                dataType: "date"
             },
             {
                 title: "Current Title",
@@ -83,7 +84,8 @@ describe('The User Details screen...', function() {
             },
             {
                 title: "End Date",
-                data: "NEVER!"
+                data: "NEVER!",
+                dataType: "date"
             },
             {
                 title: "Phone",
@@ -94,9 +96,11 @@ describe('The User Details screen...', function() {
             el.children('.FieldCard').each((idx, child) => {
                 let title = child.querySelector('.FieldCardTitle').innerText,
                     data = child.querySelector('.FieldCardValue').innerText;
-
+                if (credentialData[idx].dataType !== 'date') {
+                    expect(credentialData[idx].data).to.eql(data);
+                }
                 expect(credentialData[idx].title).to.eql(title);
-                expect(credentialData[idx].data).to.eql(data);
+                
             });
         });
     });

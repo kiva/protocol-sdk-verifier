@@ -1,17 +1,7 @@
 import * as React from 'react';
 
 // Controllers
-<<<<<<< HEAD
 import FlowControllerFC from "./hooks/FlowRouter";
-=======
-import {ScreenDispatcher} from "./controllers/ScreenDispatcher";
-
-// Screens
-import ConfirmationScreen from './screens/ConfirmationScreen';
-import VerificationRequirementScreen from './screens/VerificationRequirementScreen';
-import ResultDetails from './screens/ResultDetails';
-import AuthenticationOptionMenu from './screens/AuthenticationOptionMenu';
->>>>>>> 7a01608f7ee2d48036eff309274f9421047e5c86
 
 // Utils
 import listen from "./utils/listen";

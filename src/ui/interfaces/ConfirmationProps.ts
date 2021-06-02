@@ -1,6 +1,4 @@
-export interface ConfirmationProps {
-    integrationName: string
-}
+export interface ConfirmationProps {}
 
 interface CredentialKeyDefinition {
     name: string,

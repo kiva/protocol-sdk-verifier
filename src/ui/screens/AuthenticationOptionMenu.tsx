@@ -8,22 +8,41 @@ import CardActions from '@material-ui/core/CardActions';
 import Button from '@material-ui/core/Button';
 import classNames from 'classnames';
 
+import {CONSTANTS} from "../../constants/constants";
+
+import FlowDispatchContext from '../contexts/FlowDispatchContext';
+import FlowConstants from '../enums/FlowConstants';
+
 import "../css/AuthOptionMenu.css";
 
-import {AuthOptionProps, AuthOptionState, MenuOptionProps} from "../interfaces/AuthOptionInterfaces";
+import {AuthOptionState, MenuOptionProps} from "../interfaces/AuthOptionInterfaces";
 
 import I18n from '../utils/I18n';
 
-export default class AuthenticationOptionMenu extends React.Component<AuthOptionProps, AuthOptionState> {
+export default class AuthenticationOptionMenu extends React.Component<{}, AuthOptionState> {
 
-    constructor(props: AuthOptionProps) {
+    static contextType = FlowDispatchContext;
+    private dispatch: any;
+
+    constructor(props: any) {
         super(props);
+        const storedOption: number = parseInt(window.localStorage.getItem('authIndex') || '0');
         this.state = {
-            optionSelected: this.props.authIndex
-        };
+            optionSelected: storedOption
+        }
+    }
+
+    componentDidMount() {
+        this.dispatch = this.context();
     }
 
     selectOption = (optionSelected: number): void => {
+
+        this.dispatch({
+            type: FlowConstants.SET_AUTH_METHOD,
+            payload: optionSelected
+        });
+
         this.setState({optionSelected});
     };
 
@@ -34,7 +53,7 @@ export default class AuthenticationOptionMenu extends React.Component<AuthOption
                     {I18n.getKey('SELECT_METHOD')}
                 </Typography>
                 <div id="auth_options" className="flex-block row">
-                    {this.props.verification_opts.map((option, idx) => {
+                    {CONSTANTS.verification_options.map((option, idx) => {
                         return (
                             <MenuOption
                                 key={option.id}
@@ -49,7 +68,7 @@ export default class AuthenticationOptionMenu extends React.Component<AuthOption
                         );
                     })}
                 </div>
-                <Button id="select-auth-method" onClick={() => this.props.setNewAuthType(this.state.optionSelected)}>
+                <Button id="select-auth-method" onClick={() => this.dispatch({type: FlowConstants.NEXT})}>
                     {I18n.getKey('CONTINUE')}
                 </Button>
             </div>

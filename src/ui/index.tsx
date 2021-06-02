@@ -2,6 +2,8 @@ import listen from "./utils/listen";
 import auth from "./utils/AuthService";
 import {CONSTANTS} from "../constants/constants";
 
+window.localStorage.clear();
+
 listen(window, "message", e => {
     if (CONSTANTS.permittedOpenerOrigins.indexOf(e.origin) > -1) {
         if (e.data === "are you set?") {

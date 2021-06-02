@@ -12,6 +12,8 @@ export interface QRState {
     retrievingInviteUrl: boolean,
     verifying: boolean,
     isConnectionReady: boolean,
+    agent_connected: string,
+    connectionId: string
 }
 
 export interface QRButtonProps {

@@ -14,6 +14,7 @@ export interface OTPState {
 }
 
 export interface SMSData {
+    [index: string]: any,
     smsSent: boolean,
     phoneNumber: string,
     phoneScreen: string

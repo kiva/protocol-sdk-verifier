@@ -17,12 +17,6 @@ export interface MenuOptionProps {
     option_index: number
 }
 
-export interface AuthOptionProps {
-    verification_opts: AuthOption[],
-    setNewAuthType: (index: number) => void,
-    authIndex: number
-}
-
 export interface AuthOptionState {
     optionSelected: number
 }

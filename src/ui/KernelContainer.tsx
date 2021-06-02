@@ -81,15 +81,6 @@ export class KernelContainer extends React.Component<KernelProps, KernelState> {
         );
     }
 
-    renderVerificationRequirement() {
-        return (
-            <VerificationRequirementScreen
-                integrationName={I18n.getKey('SITE_TITLE')}
-                setProfile={this.setProfile}
-            />
-        )
-    }
-
     renderContent() {
         const {isLoading} = this.state;
         if (isLoading) {

@@ -10,7 +10,6 @@ import I18n from "./utils/I18n";
 
 // Interfaces
 import {KernelProps, KernelState} from "./interfaces/KernelInterfaces";
-import {ProofRequestProfile} from "./interfaces/VerificationRequirementProps";
 
 // Constants
 import {actionList, CONSTANTS} from "../constants/constants";

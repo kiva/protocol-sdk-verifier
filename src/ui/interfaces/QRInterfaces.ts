@@ -1,9 +1,12 @@
+import {ProofRequestProfile} from "./VerificationRequirementProps";
+
 export interface QRProps {
     setConnectionId(id: string): Promise<void>,
     verifyConnection(established: boolean): Promise<void>,
     connectionId: string,
     connected: boolean,
-    agentType: string
+    agentType: string,
+    profile: ProofRequestProfile
 }
 
 export interface QRState {

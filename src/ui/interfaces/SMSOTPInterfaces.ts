@@ -1,9 +1,12 @@
+import {ProofRequestProfile} from "./VerificationRequirementProps";
+
 export interface SMSProps {
     phoneNumber: string,
     setSmsInfo(data: SMSData): void,
     phoneScreen: string,
     email: string,
-    smsSent: boolean
+    smsSent: boolean,
+    profile: ProofRequestProfile
 }
 
 export interface OTPState {
@@ -41,7 +44,8 @@ export interface OTPScreenProps {
     phoneNumber: string,
     email: string,
     smsSent: boolean,
-    setContainerState(data: SMSData): void
+    setContainerState(data: SMSData): void,
+    profile: ProofRequestProfile
 }
 
 export interface OTPInputProps {
@@ -64,7 +68,8 @@ export interface PhoneScreenProps {
     phoneNumber: string,
     setContainerState(data: SMSData): void,
     email: string,
-    smsSent: boolean
+    smsSent: boolean,
+    profile: ProofRequestProfile
 }
 
 export interface SMSPostBody {

@@ -41,8 +41,8 @@ describe("The Confirmation Screen", () => {
         });
     });
 
-    it('advances to the Authentication Options Menu when user Accepts', () => {
+    it('advances to the Verification Requirements Screen when user Accepts', () => {
         cy.contains('Accept').click();
-        cy.get('#auth_options').should('be.visible');
+        cy.get('.VerificationRequirement').should('be.visible');
     });
 });

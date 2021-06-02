@@ -72,7 +72,8 @@ const FlowController: React.FC<{}> = () => {
             details: 'ResultDetails',
             agency_qr: 'AgencyQR',
             email_input: 'EmailScreen',
-            smsotp: 'SMSOTPScreen'
+            smsotp: 'SMSOTPScreen',
+            verificationRequirement: 'VerificationRequirementScreen'
         }
 
         const component: any = React.lazy(() => import('../screens/' + componentMap[step]));
@@ -137,14 +138,18 @@ function createInitialSteps(index: number) {
     const firstScreen = options[index].sequence[0];
     const ret: any = {
         confirmation: {
+            [FlowConstants.NEXT]: 'verificationRequirement'
+        },
+        verificationRequirement: {
+            [FlowConstants.BACK]: 'confirmation',
             [FlowConstants.NEXT]: firstScreen
         }
     };
 
     if (useMenu) {
-        ret.confirmation[FlowConstants.NEXT] = 'menu';
+        ret.verificationRequirement[FlowConstants.NEXT] = 'menu';
         ret['menu'] = {
-            [FlowConstants.BACK]: 'confirmation',
+            [FlowConstants.BACK]: 'verificationRequirement',
             [FlowConstants.NEXT]: firstScreen
         }
     }

@@ -1,7 +1,17 @@
 import * as React from 'react';
 
 // Controllers
+<<<<<<< HEAD
 import FlowControllerFC from "./hooks/FlowRouter";
+=======
+import {ScreenDispatcher} from "./controllers/ScreenDispatcher";
+
+// Screens
+import ConfirmationScreen from './screens/ConfirmationScreen';
+import VerificationRequirementScreen from './screens/VerificationRequirementScreen';
+import ResultDetails from './screens/ResultDetails';
+import AuthenticationOptionMenu from './screens/AuthenticationOptionMenu';
+>>>>>>> 7a01608f7ee2d48036eff309274f9421047e5c86
 
 // Utils
 import listen from "./utils/listen";
@@ -10,6 +20,7 @@ import I18n from "./utils/I18n";
 
 // Interfaces
 import {KernelProps, KernelState} from "./interfaces/KernelInterfaces";
+import {ProofRequestProfile} from "./interfaces/VerificationRequirementProps";
 
 // Constants
 import {actionList, CONSTANTS} from "../constants/constants";
@@ -78,6 +89,15 @@ export class KernelContainer extends React.Component<KernelProps, KernelState> {
                 {this.renderFooter()}
             </div>
         );
+    }
+
+    renderVerificationRequirement() {
+        return (
+            <VerificationRequirementScreen
+                integrationName={I18n.getKey('SITE_TITLE')}
+                setProfile={this.setProfile}
+            />
+        )
     }
 
     renderContent() {

@@ -18,11 +18,15 @@ const messageMap = {
     AGREEMENT_2: "ConfirmationScreen.text.agreement-2",
     INFO_INCLUDES: "ConfirmationScreen.text.infoShareIncludes",
     REVIEW: "ConfirmationScreen.text.pleaseReview",
+    // Verification Requirement Screen
+    VERIFICATION_REQUIRED: "VerificationRequirementScreen.verificationRequired",
+    PLEASE_SELECT: "VerificationRequirementScreen.pleaseSelect",
     // Error Messages
     NO_INVITE_URL: "Errors.qr.noInviteUrl",
     QR_CONNECTION_ERROR: "Errors.qr.connectionError",
     QR_NO_CONNECTION_NOTIFY: "Errors.qr.notConnected",
     QR_NOT_FOUND: "Errors.qr.noConnectionFound",
+    PROOFS_ERROR: "Errors.proofs.fetchProofsError",
     NO_EMAIL: "Errors.email.noInput",
     INVALID_PHONE_NUMBER_INPUT: "Errors.input.missingPhoneNumber",
     INVALID_OTP_ENTRY: "Errors.input.invalidOTP",

@@ -20,6 +20,7 @@ import FlowDispatchContext from '../contexts/FlowDispatchContext';
 import FlowConstants from '../enums/FlowConstants';
 
 import {PhoneScreenProps, SMSData, SMSProps, OTPState, PhoneNumberInputProps, OTPInputProps, SMSStatusProps, SMSButtonProps, PhoneState, OTPInputState, OTPScreenProps, SMSPostBody} from "../interfaces/SMSOTPInterfaces";
+import {ProofRequestProfile} from '../interfaces/VerificationRequirementProps';
 
 import "../css/SMSOTPScreen.css";
 import '../css/DialogBody.css';
@@ -29,6 +30,12 @@ const SDK: GuardianSDK = GuardianSDK.init({
     endpoint: '/v2/kiva/api/guardian/verify',
     auth_method: 'SMS'
 });
+const profileData: string = window.localStorage.getItem('profile') || JSON.stringify({
+    comment: '',
+    proof_request: {},
+    schema_id: ''
+});
+const profile: ProofRequestProfile = JSON.parse(profileData);
 
 export default class SMSOTPScreen extends React.Component<SMSProps, OTPState> {
 
@@ -57,6 +64,7 @@ export default class SMSOTPScreen extends React.Component<SMSProps, OTPState> {
                 setContainerState={this.setContainerState}
                 smsSent={this.state.smsSent}
                 email={this.email}
+                profile={profile}
             />
         );
     }
@@ -68,6 +76,7 @@ export default class SMSOTPScreen extends React.Component<SMSProps, OTPState> {
                 email={this.email}
                 smsSent={this.state.smsSent}
                 setContainerState={this.setContainerState}
+                profile={profile}
             />
         );
     }
@@ -133,7 +142,7 @@ class PhoneNumberScreen extends React.Component<PhoneScreenProps, PhoneState> {
 
     setPhoneNumberRequestBody(): SMSPostBody {
         return {
-            profile: 'employee.proof.request.json',
+            profile: this.props.profile.schema_id,
             guardianData: {
                 pluginType: 'SMS_OTP',
                 filters: {
@@ -291,7 +300,7 @@ class OTPScreen extends React.Component<OTPScreenProps, OTPInputState> {
 
     setOTPPostBody(): SMSPostBody {
         return {
-            profile: 'employee.proof.request.json',
+            profile: this.props.profile.schema_id,
             guardianData: {
                 pluginType: 'SMS_OTP',
                 filters: {

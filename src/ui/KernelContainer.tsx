@@ -7,7 +7,6 @@ import FlowControllerFC from "./hooks/FlowRouter";
 import listen from "./utils/listen";
 import Warden from "./utils/Warden";
 import I18n from "./utils/I18n";
-import FlowController from "./utils/FlowController";
 
 // Interfaces
 import {KernelProps, KernelState} from "./interfaces/KernelInterfaces";
@@ -18,8 +17,6 @@ import {actionList, CONSTANTS} from "../constants/constants";
 // CSS
 import './css/KernelContainer.css';
 import './css/Common.css';
-
-export let flowController: FlowController;
 
 export class KernelContainer extends React.Component<KernelProps, KernelState> {
 
@@ -75,7 +72,7 @@ export class KernelContainer extends React.Component<KernelProps, KernelState> {
 
     renderNormalFlow() {
         return (
-            <div className="normalFlow" data-cy={screenNames[this.state.step]}>
+            <div className="normalFlow">
                 {this.renderHeader()}
                 <FlowControllerFC />
                 {this.renderFooter()}
@@ -96,9 +93,3 @@ export class KernelContainer extends React.Component<KernelProps, KernelState> {
         return this.renderContent();
     }
 }
-
-const screenNames: any = {
-    confirmation: 'Consent',
-    loading: 'AppLoad',
-    details: 'CustomerInfo'
-};

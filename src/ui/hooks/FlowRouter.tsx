@@ -84,7 +84,7 @@ const FlowController: React.FC<{}> = () => {
         <FlowDispatchContext.Provider value={() => dispatch}>
             <Suspense fallback="">
                 <div className="KernelContainer">
-                    <div className="KernelContent">
+                    <div className="KernelContent" data-cy={state.step}>
                         <TheComponent />
                     </div>
                 </div>

@@ -12,6 +12,7 @@ import classNames from 'classnames';
 
 import {QRProps, QRState, QRButtonProps} from "../interfaces/QRInterfaces";
 import {IAgent} from "../interfaces/AgentInterfaces";
+import {ProofRequestProfile} from '../interfaces/VerificationRequirementProps';
 
 import {CONSTANTS} from '../../constants/constants';
 
@@ -28,6 +29,12 @@ import "../css/QRScreen.css";
 
 let cancel: boolean;
 let authIndex: number = parseInt(window.localStorage.getItem('authIndex') || '0');
+const profileData: string = window.localStorage.getItem('profile') || JSON.stringify({
+    comment: '',
+    proof_request: {},
+    schema_id: ''
+});
+const profile: ProofRequestProfile = JSON.parse(profileData);
 const pollInterval: number = 200;
 
 export default class AgencyQR extends React.Component<QRProps, QRState> {
@@ -48,6 +55,7 @@ export default class AgencyQR extends React.Component<QRProps, QRState> {
             connectionId: window.localStorage.getItem('connection_id') || ''
         };
         this.agent = this.determineCloudAgent();
+        console.log()
     }
 
     componentWillUnmount() {
@@ -132,7 +140,7 @@ export default class AgencyQR extends React.Component<QRProps, QRState> {
                 this.acceptProof(this.agent.getProof(verificationStatus));
             } else if (!!this.agent.isRejected && this.agent.isRejected(verificationStatus)) {
                 throw I18n.computeKey({
-                    proofRequestComment: this.props.profile.comment
+                    proofRequestComment: profile.comment
                 }, 'REJECTED_PROOF')
             } else if (!cancel) {
                 setTimeout(() => {
@@ -170,7 +178,7 @@ export default class AgencyQR extends React.Component<QRProps, QRState> {
     verify = async () => {
         try {
             const id: string = this.settleConnectionId();
-            const verification: any = await this.agent.sendVerification(id, this.props.profile);
+            const verification: any = await this.agent.sendVerification(id, profile);
             this.pollVerification(verification);
         } catch (e) {
             console.log(e);

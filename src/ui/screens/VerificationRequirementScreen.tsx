@@ -20,7 +20,7 @@ import {VerificationRequirementProps, VerificationRequirementState} from '../int
 import auth from '../utils/AuthService';
 import _ from 'lodash';
 import FlowDispatchContext from '../contexts/FlowDispatchContext';
-import FlowConstants from '../enums/FlowConstants';
+import FlowDispatchTypes from '../enums/FlowDispatchTypes';
 
 export default class VerificationRequirementScreen extends React.Component<VerificationRequirementProps, VerificationRequirementState> {
     public readonly agent: IAgent;
@@ -129,14 +129,14 @@ export default class VerificationRequirementScreen extends React.Component<Verif
                     <Grid item>
                         <Button
                             className="back"
-                            onClick={() => this.dispatch({type: FlowConstants.BACK})}>
+                            onClick={() => this.dispatch({type: FlowDispatchTypes.BACK})}>
                             {I18n.getKey('BACK')}
                         </Button>
                     </Grid>
                     <Grid item>
                         <Button
                             className="accept"
-                            onClick={() => this.dispatch({type: FlowConstants.NEXT})}>
+                            onClick={() => this.dispatch({type: FlowDispatchTypes.NEXT})}>
                             {I18n.getKey('CONTINUE')}
                         </Button>
                     </Grid>

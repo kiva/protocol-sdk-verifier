@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 // Controllers
-import FlowControllerFC from "./hooks/FlowRouter";
+import FlowRouter from "./hooks/FlowRouter";
 
 // Utils
 import listen from "./utils/listen";
@@ -74,7 +74,7 @@ export class KernelContainer extends React.Component<KernelProps, KernelState> {
         return (
             <div className="normalFlow">
                 {this.renderHeader()}
-                <FlowControllerFC />
+                <FlowRouter />
                 {this.renderFooter()}
             </div>
         );

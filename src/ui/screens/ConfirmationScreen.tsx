@@ -11,7 +11,7 @@ import '../css/ConfirmationScreen.css';
 import {CredentialKeyFieldState} from '../interfaces/ConfirmationProps';
 
 import FlowDispatchContext from '../contexts/FlowDispatchContext';
-import FlowConstants from '../enums/FlowConstants';
+import FlowDispatchTypes from '../enums/FlowDispatchTypes';
 
 import {CONSTANTS} from "../../constants/constants";
 
@@ -23,7 +23,7 @@ export default class ConfirmationScreen extends React.Component {
 
     consent = (): void => {
         const dispatch = this.context();
-        const type: string = FlowConstants.NEXT;
+        const type: string = FlowDispatchTypes.NEXT;
         dispatch({type});
     }
 

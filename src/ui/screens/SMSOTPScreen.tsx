@@ -17,7 +17,7 @@ import I18n from '../utils/I18n';
 import GuardianSDK from '../utils/GuardianSDK';
 import auth from '../utils/AuthService';
 import FlowDispatchContext from '../contexts/FlowDispatchContext';
-import FlowConstants from '../enums/FlowConstants';
+import FlowDispatchTypes from '../enums/FlowDispatchTypes';
 
 import {PhoneScreenProps, SMSData, SMSProps, OTPState, PhoneNumberInputProps, OTPInputProps, SMSStatusProps, SMSButtonProps, PhoneState, OTPInputState, OTPScreenProps, SMSPostBody} from "../interfaces/SMSOTPInterfaces";
 import {ProofRequestProfile} from '../interfaces/VerificationRequirementProps';
@@ -209,7 +209,7 @@ class PhoneNumberScreen extends React.Component<PhoneScreenProps, PhoneState> {
                     handleEnter={this.handlePhoneNumberEnter}
                 />
                 <SMSScreenButtons
-                    onClickBack={() => this.dispatch({type: FlowConstants.BACK})}
+                    onClickBack={() => this.dispatch({type: FlowDispatchTypes.BACK})}
                     onSubmit={() => this.beginTwilioRequest()}
                 />
             </div>
@@ -294,7 +294,7 @@ class OTPScreen extends React.Component<OTPScreenProps, OTPInputState> {
     handleEkycSuccess = (personalInfo: any) => {
         window.localStorage.setItem('personalInfo', JSON.stringify(personalInfo));
         setTimeout(() => {
-            this.dispatch({type: FlowConstants.NEXT});
+            this.dispatch({type: FlowDispatchTypes.NEXT});
         }, 1000);
     };
 

@@ -11,7 +11,7 @@ import classNames from 'classnames';
 import {CONSTANTS} from "../../constants/constants";
 
 import FlowDispatchContext from '../contexts/FlowDispatchContext';
-import FlowConstants from '../enums/FlowConstants';
+import FlowDispatchTypes from '../enums/FlowDispatchTypes';
 
 import "../css/AuthOptionMenu.css";
 
@@ -39,7 +39,7 @@ export default class AuthenticationOptionMenu extends React.Component<{}, AuthOp
     selectOption = (optionSelected: number): void => {
 
         this.dispatch({
-            type: FlowConstants.SET_AUTH_METHOD,
+            type: FlowDispatchTypes.SET_AUTH_METHOD,
             payload: optionSelected
         });
 
@@ -68,7 +68,7 @@ export default class AuthenticationOptionMenu extends React.Component<{}, AuthOp
                         );
                     })}
                 </div>
-                <Button id="select-auth-method" onClick={() => this.dispatch({type: FlowConstants.NEXT})}>
+                <Button id="select-auth-method" onClick={() => this.dispatch({type: FlowDispatchTypes.NEXT})}>
                     {I18n.getKey('CONTINUE')}
                 </Button>
             </div>

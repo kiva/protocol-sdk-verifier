@@ -17,7 +17,7 @@ import {ProofRequestProfile} from '../interfaces/VerificationRequirementProps';
 import {CONSTANTS} from '../../constants/constants';
 
 import FlowDispatchContext from '../contexts/FlowDispatchContext';
-import FlowConstants from '../enums/FlowConstants';
+import FlowDispatchTypes from '../enums/FlowDispatchTypes';
 
 import I18n from '../utils/I18n';
 import LocalAgent from '../agents/LocalAgent';
@@ -36,6 +36,7 @@ const profileData: string = window.localStorage.getItem('profile') || JSON.strin
 });
 const profile: ProofRequestProfile = JSON.parse(profileData);
 const pollInterval: number = 200;
+const verificationId: string = CONSTANTS.verification_options[authIndex].id;
 
 export default class AgencyQR extends React.Component<QRProps, QRState> {
 
@@ -69,7 +70,7 @@ export default class AgencyQR extends React.Component<QRProps, QRState> {
     }
 
     determineCloudAgent = (): IAgent => {
-        switch (CONSTANTS.verification_options[authIndex].id) {
+        switch (verificationId) {
         case "Local_QR":
             return LocalAgent.init();
         case "Kiva_QR":
@@ -172,7 +173,7 @@ export default class AgencyQR extends React.Component<QRProps, QRState> {
 
     acceptProof(verificationData: any) {
         window.localStorage.setItem('personalInfo', JSON.stringify(verificationData));
-        this.dispatch({type: FlowConstants.NEXT});
+        this.dispatch({type: FlowDispatchTypes.NEXT});
     }
 
     verify = async () => {
@@ -306,7 +307,7 @@ export default class AgencyQR extends React.Component<QRProps, QRState> {
     render() {
         const {isConnectionReady, verifying} = this.state;
         return (
-            <div id={CONSTANTS.verification_options[authIndex].id} className="flex-block column">
+            <div id={verificationId} className="flex-block column">
                 <Grid container
                     direction="column"
                     justify="center"
@@ -316,7 +317,7 @@ export default class AgencyQR extends React.Component<QRProps, QRState> {
                 <QRScreenButtons
                     isConnectionReady={isConnectionReady}
                     isVerifying={verifying}
-                    onClickBack={() => this.dispatch({type: FlowConstants.BACK})}
+                    onClickBack={() => this.dispatch({type: FlowDispatchTypes.BACK})}
                     onSubmit={() => this.startVerification()}
                     onReset={() => this.resetFlow()}
                 />

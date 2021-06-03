@@ -1,5 +1,5 @@
 import React, {useEffect, useReducer, Suspense} from 'react';
-import FlowConstants from '../enums/FlowConstants';
+import FlowDispatchTypes from '../enums/FlowDispatchTypes';
 import {AuthOption} from '../interfaces/AuthOptionInterfaces';
 import FlowDispatchContext from '../contexts/FlowDispatchContext';
 import {Flow} from '../interfaces/FlowSelectorInterfaces';
@@ -35,22 +35,22 @@ const FlowController: React.FC<{}> = () => {
         if (!theFlow.hasOwnProperty(step)) throw new Error(`Referenced step '${step}' does not exist in the flow`);
 
         switch (type) {
-        case FlowConstants.NEXT:
+        case FlowDispatchTypes.NEXT:
             return {
                 ...state,
-                step: theFlow[step]![FlowConstants.NEXT]
+                step: theFlow[step]![FlowDispatchTypes.NEXT]
             };
-        case FlowConstants.BACK:
+        case FlowDispatchTypes.BACK:
             return {
                 ...state,
-                step: theFlow[step]![FlowConstants.BACK]
+                step: theFlow[step]![FlowDispatchTypes.BACK]
             };
-        case FlowConstants.RESTART:
+        case FlowDispatchTypes.RESTART:
             return {
                 ...state,
                 step: 'confirmation'
             };
-        case FlowConstants.SET_AUTH_METHOD:
+        case FlowDispatchTypes.SET_AUTH_METHOD:
             if ('menu' === state.step) {
                 window.localStorage.setItem('authIndex', payload.toString());
                 return {
@@ -109,48 +109,48 @@ function injectAuthMethod(index: number, flow: any) {
 
     if (!sequence.length) throw new Error('You done goofed');
 
-    let currentPoint: string | undefined = sequence[0];
+    let currentPoint: string = sequence[0];
 
-    flow[beginAt][FlowConstants.NEXT] = currentPoint;
-    flow[currentPoint!] = {
-        [FlowConstants.BACK]: beginAt
+    flow[beginAt][FlowDispatchTypes.NEXT] = currentPoint;
+    flow[currentPoint] = {
+        [FlowDispatchTypes.BACK]: beginAt
     };
 
     foldSequence(currentPoint, sequence, flow);
 }
 
-function foldSequence(currentPoint: string | undefined, sequence: string[], flow: any) {
+function foldSequence(currentPoint: string , sequence: string[], flow: any) {
 
     for (let i = 1; i < sequence.length; i++) {
-        let temp: string | undefined = currentPoint;
+        let temp: string = currentPoint;
         currentPoint = sequence[i];
 
-        flow[temp!][FlowConstants.NEXT] = currentPoint;
-        flow[currentPoint!] = {
-            [FlowConstants.BACK]: temp
+        flow[temp][FlowDispatchTypes.NEXT] = currentPoint;
+        flow[currentPoint] = {
+            [FlowDispatchTypes.BACK]: temp
         };
     }
 
-    flow[currentPoint!][FlowConstants.NEXT] = 'details';
+    flow[currentPoint][FlowDispatchTypes.NEXT] = 'details';
 }
 
 function createInitialSteps(index: number) {
     const firstScreen = options[index].sequence[0];
     const ret: any = {
         confirmation: {
-            [FlowConstants.NEXT]: 'verificationRequirement'
+            [FlowDispatchTypes.NEXT]: 'verificationRequirement'
         },
         verificationRequirement: {
-            [FlowConstants.BACK]: 'confirmation',
-            [FlowConstants.NEXT]: firstScreen
+            [FlowDispatchTypes.BACK]: 'confirmation',
+            [FlowDispatchTypes.NEXT]: firstScreen
         }
     };
 
     if (useMenu) {
-        ret.verificationRequirement[FlowConstants.NEXT] = 'menu';
+        ret.verificationRequirement[FlowDispatchTypes.NEXT] = 'menu';
         ret['menu'] = {
-            [FlowConstants.BACK]: 'verificationRequirement',
-            [FlowConstants.NEXT]: firstScreen
+            [FlowDispatchTypes.BACK]: 'verificationRequirement',
+            [FlowDispatchTypes.NEXT]: firstScreen
         }
     }
 
@@ -166,5 +166,6 @@ interface ComponentMap {
     [index: string]: string,
     menu: string,
     confirmation: string,
+    verificationRequirement: string,
     details: string
 }

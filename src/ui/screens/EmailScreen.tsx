@@ -8,7 +8,7 @@ import FormControl from '@material-ui/core/FormControl';
 
 import I18n from '../utils/I18n';
 import FlowDispatchContext from '../contexts/FlowDispatchContext';
-import FlowConstants from '../enums/FlowConstants';
+import FlowDispatchTypes from '../enums/FlowDispatchTypes';
 
 import {EmailProps, EmailState} from '../interfaces/EmailInterfaces';
 
@@ -42,7 +42,7 @@ export default class EmailScreen extends React.Component<EmailProps, EmailState>
         if (!this.state.email) {
             notify.show(I18n.getKey('NO_EMAIL'), 'error', 3000);
         } else {
-            this.dispatch({type: FlowConstants.NEXT});
+            this.dispatch({type: FlowDispatchTypes.NEXT});
         }
     }
 
@@ -77,7 +77,7 @@ export default class EmailScreen extends React.Component<EmailProps, EmailState>
                             <Button
                                 className="secondary"
                                 id="back"
-                                onClick={() => this.dispatch({type: FlowConstants.BACK})}>
+                                onClick={() => this.dispatch({type: FlowDispatchTypes.BACK})}>
                                 {I18n.getKey('BACK')}
                             </Button>
                             <Button

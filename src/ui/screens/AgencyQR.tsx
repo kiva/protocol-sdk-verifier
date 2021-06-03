@@ -36,7 +36,7 @@ const profileData: string = window.localStorage.getItem('profile') || JSON.strin
 });
 const profile: ProofRequestProfile = JSON.parse(profileData);
 const pollInterval: number = 200;
-const verificationId: string = CONSTANTS.verification_options[authIndex].id;
+const selectedVerificationOptionId: string = CONSTANTS.verification_options[authIndex].id;
 
 export default class AgencyQR extends React.Component<QRProps, QRState> {
 
@@ -70,7 +70,7 @@ export default class AgencyQR extends React.Component<QRProps, QRState> {
     }
 
     determineCloudAgent = (): IAgent => {
-        switch (verificationId) {
+        switch (selectedVerificationOptionId) {
         case "Local_QR":
             return LocalAgent.init();
         case "Kiva_QR":
@@ -134,9 +134,9 @@ export default class AgencyQR extends React.Component<QRProps, QRState> {
         }
     }
 
-    pollVerification = async (verificationId: string) => {
+    pollVerification = async (selectedVerificationOptionId: string) => {
         try {
-            let verificationStatus: any = await this.agent.checkVerification(verificationId);
+            let verificationStatus: any = await this.agent.checkVerification(selectedVerificationOptionId);
             if (this.agent.isVerified(verificationStatus)) {
                 this.acceptProof(this.agent.getProof(verificationStatus));
             } else if (!!this.agent.isRejected && this.agent.isRejected(verificationStatus)) {
@@ -145,7 +145,7 @@ export default class AgencyQR extends React.Component<QRProps, QRState> {
                 }, 'REJECTED_PROOF')
             } else if (!cancel) {
                 setTimeout(() => {
-                    this.pollVerification(verificationId);
+                    this.pollVerification(selectedVerificationOptionId);
                 }, pollInterval);
             }
         } catch (e) {
@@ -307,7 +307,7 @@ export default class AgencyQR extends React.Component<QRProps, QRState> {
     render() {
         const {isConnectionReady, verifying} = this.state;
         return (
-            <div id={verificationId} className="flex-block column">
+            <div id={selectedVerificationOptionId} className="flex-block column">
                 <Grid container
                     direction="column"
                     justify="center"

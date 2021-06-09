@@ -1,4 +1,6 @@
-export interface VerificationRequirementProps {}
+import ICommonProps from './ICommonProps';
+
+export interface VerificationRequirementProps extends ICommonProps {}
 
 export interface VerificationRequirementState {
   verificationRequired: number,

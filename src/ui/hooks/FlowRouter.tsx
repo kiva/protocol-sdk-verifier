@@ -1,36 +1,44 @@
-import React, {useEffect, useReducer, Suspense} from 'react';
+import React, {useEffect, useRef, useReducer, Suspense} from 'react';
 import FlowDispatchTypes from '../enums/FlowDispatchTypes';
 import {AuthOption} from '../interfaces/AuthOptionInterfaces';
 import FlowDispatchContext from '../contexts/FlowDispatchContext';
 import {Flow} from '../interfaces/FlowSelectorInterfaces';
 import {CONSTANTS} from '../../constants/constants';
 
+import {ComponentStoreGet, ComponentStoreSet, ComponentStoreMethods, FlowAction, ComponentStore, ComponentMap} from '../interfaces/FlowRouterInterfaces';
+
 const options: AuthOption[] = CONSTANTS.verification_options;
 const useMenu: boolean = options.length > 1;
 
-let currentAuthIndex: number = parseInt(window.localStorage.getItem('authIndex') || '0');
-let flow: Flow;
+// let flow: Flow;
 
 const FlowController: React.FC<{}> = () => {
+    const flow = useRef<Flow>(createFlow(0));
+    const componentStore = useRef<ComponentStore>(initComponentStore());
+
     const [state, dispatch] = useReducer(flowReducer, {
         step: 'confirmation',
         authIndex: 0
     });
 
-    let TheComponent = renderScreen(state.step);
+    const prevStep: string = flow.current[state.step]![FlowDispatchTypes.BACK] ?? '';
+
+    let TheComponent = renderScreen(state.step),
+        componentStoreMethods: ComponentStoreMethods = createComponentStoreConnection(state.step);
 
     useEffect(() => {
-        flow = createFlow(currentAuthIndex);
-    }, []);
-
-    useEffect(() => {
-        flow = createFlow(state.authIndex);
+        flow.current = createFlow(state.authIndex);
     }, [state.authIndex]);
+
+    useEffect(() => {
+        // eslint-disable-next-line
+        componentStoreMethods = createComponentStoreConnection(state.step);
+    }, [state.step, createComponentStoreConnection]);
 
     function flowReducer(state: any, action: FlowAction): any {
         const {type, payload} = action;
         const {step} = state;
-        const theFlow: Flow = flow ?? createFlow(0);
+        const theFlow: Flow = flow.current;
 
         if (!theFlow.hasOwnProperty(step)) throw new Error(`Referenced step '${step}' does not exist in the flow`);
 
@@ -52,7 +60,6 @@ const FlowController: React.FC<{}> = () => {
             };
         case FlowDispatchTypes.SET_AUTH_METHOD:
             if ('menu' === state.step) {
-                window.localStorage.setItem('authIndex', payload.toString());
                 return {
                     ...state,
                     authIndex: payload
@@ -74,11 +81,39 @@ const FlowController: React.FC<{}> = () => {
             email_input: 'EmailScreen',
             smsotp: 'SMSOTPScreen',
             verificationRequirement: 'VerificationRequirementScreen'
-        }
+        };
 
         const component: any = React.lazy(() => import('../screens/' + componentMap[step]));
 
         return component;
+    }
+
+    // TODO: Make into a hook and inject the component store as a parameter
+    function createComponentStoreConnection(step: string) {
+        const get: ComponentStoreGet = (dataKey: string, dfault?: any, component?: string) => {
+            // This is equivalent to component ??= step, but that broke the compiler
+            component ?? (component = step);
+            dfault ?? (dfault = undefined);
+
+            return (componentStore.current[component] && componentStore.current[component][dataKey]) ?? dfault;
+        };
+
+        const set: ComponentStoreSet = (dataKey: string, value: any) => {
+            if (!componentStore.current[step]) {
+                componentStore.current[step] = {};
+            }
+
+            componentStore.current[step] = {
+                ...componentStore.current[step],
+                [dataKey]: value
+            };
+        };
+
+        const reset = () => {
+            componentStore.current = initComponentStore();
+        };
+
+        return {get, set, reset};
     }
 
     return (
@@ -86,7 +121,7 @@ const FlowController: React.FC<{}> = () => {
             <Suspense fallback="">
                 <div className="KernelContainer">
                     <div className="KernelContent" data-cy={state.step}>
-                        <TheComponent />
+                        <TheComponent store={componentStoreMethods} prevScreen={prevStep} authIndex={state.authIndex} />
                     </div>
                 </div>
             </Suspense>
@@ -132,6 +167,9 @@ function foldSequence(currentPoint: string , sequence: string[], flow: any) {
     }
 
     flow[currentPoint][FlowDispatchTypes.NEXT] = 'details';
+    flow['details'] = {
+        [FlowDispatchTypes.BACK]: currentPoint
+    };
 }
 
 function createInitialSteps(index: number) {
@@ -157,15 +195,11 @@ function createInitialSteps(index: number) {
     return ret;
 }
 
-interface FlowAction {
-    type: string,
-    payload?: any;
-}
-
-interface ComponentMap {
-    [index: string]: string,
-    menu: string,
-    confirmation: string,
-    verificationRequirement: string,
-    details: string
+function initComponentStore(): ComponentStore {
+    return {
+        menu: {},
+        confirmation: {},
+        verificationRequirement: {},
+        details: {}
+    };
 }

@@ -1,6 +1,8 @@
 import {ProofRequestProfile} from "./VerificationRequirementProps";
+import {ComponentStoreMethods} from './FlowRouterInterfaces';
+import ICommonProps from './ICommonProps';
 
-export interface SMSProps {
+export interface SMSProps extends ICommonProps {
     phoneNumber: string,
     setSmsInfo(data: SMSData): void,
     phoneScreen: string,
@@ -45,7 +47,8 @@ export interface OTPScreenProps {
     email: string,
     smsSent: boolean,
     setContainerState(data: SMSData): void,
-    profile: ProofRequestProfile
+    profile: ProofRequestProfile,
+    store: ComponentStoreMethods
 }
 
 export interface OTPInputProps {
@@ -69,7 +72,8 @@ export interface PhoneScreenProps {
     setContainerState(data: SMSData): void,
     email: string,
     smsSent: boolean,
-    profile: ProofRequestProfile
+    profile: ProofRequestProfile,
+    store: ComponentStoreMethods
 }
 
 export interface SMSPostBody {

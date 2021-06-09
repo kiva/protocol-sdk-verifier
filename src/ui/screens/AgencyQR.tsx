@@ -28,21 +28,16 @@ import "../css/Common.css";
 import "../css/QRScreen.css";
 
 let cancel: boolean;
-let authIndex: number = parseInt(window.localStorage.getItem('authIndex') || '0');
-const profileData: string = window.localStorage.getItem('profile') || JSON.stringify({
-    comment: '',
-    proof_request: {},
-    schema_id: ''
-});
-const profile: ProofRequestProfile = JSON.parse(profileData);
+
 const pollInterval: number = 200;
-const selectedVerificationOptionId: string = CONSTANTS.verification_options[authIndex].id;
 
 export default class AgencyQR extends React.Component<QRProps, QRState> {
 
     public readonly agent: IAgent;
     static contextType = FlowDispatchContext;
     private dispatch: any;
+    private profile: ProofRequestProfile;
+    private selectedVerificationOptionId: string;
 
     constructor(props: QRProps) {
         super(props);
@@ -52,11 +47,16 @@ export default class AgencyQR extends React.Component<QRProps, QRState> {
             connectionError: "",
             verifying: false,
             isConnectionReady: false,
-            agent_connected: window.localStorage.getItem('agent_connected') || 'false',
-            connectionId: window.localStorage.getItem('connection_id') || ''
+            agent_connected: this.props.store.get('agent_connected', false),
+            connectionId: this.props.store.get('connection_id', '')
         };
+        this.profile = this.props.store.get('profile', {
+            comment: '',
+            proof_request: {},
+            schema_id: ''
+        }, 'verificationRequirement');
+        this.selectedVerificationOptionId = CONSTANTS.verification_options[this.props.store.get('authIndex', 0, 'menu')].id;
         this.agent = this.determineCloudAgent();
-        console.log()
     }
 
     componentWillUnmount() {
@@ -70,7 +70,7 @@ export default class AgencyQR extends React.Component<QRProps, QRState> {
     }
 
     determineCloudAgent = (): IAgent => {
-        switch (selectedVerificationOptionId) {
+        switch (this.selectedVerificationOptionId) {
         case "Local_QR":
             return LocalAgent.init();
         case "Kiva_QR":
@@ -97,7 +97,7 @@ export default class AgencyQR extends React.Component<QRProps, QRState> {
     }
 
     storeConnectionId = (connectionId: string): void => {
-        window.localStorage.setItem('connection_id', connectionId);
+        this.props.store.set('connection_id', connectionId);
         this.setState({connectionId})
     }
 
@@ -118,10 +118,10 @@ export default class AgencyQR extends React.Component<QRProps, QRState> {
         try {
             let connectionStatus: any = await this.agent.getConnection(connectionId);
             if (this.agent.isConnected(connectionStatus)) {
-                window.localStorage.setItem('agent_connected', 'true');
+                this.props.store.set('agent_connected', true);
                 this.setState({
                     isConnectionReady: true,
-                    agent_connected: 'true'
+                    agent_connected: true
                 });
             } else if (!cancel) {
                 setTimeout(() => {
@@ -136,16 +136,16 @@ export default class AgencyQR extends React.Component<QRProps, QRState> {
 
     pollVerification = async (selectedVerificationOptionId: string) => {
         try {
-            let verificationStatus: any = await this.agent.checkVerification(selectedVerificationOptionId);
+            let verificationStatus: any = await this.agent.checkVerification(this.selectedVerificationOptionId);
             if (this.agent.isVerified(verificationStatus)) {
                 this.acceptProof(this.agent.getProof(verificationStatus));
             } else if (!!this.agent.isRejected && this.agent.isRejected(verificationStatus)) {
                 throw I18n.computeKey({
-                    proofRequestComment: profile.comment
+                    proofRequestComment: this.profile.comment
                 }, 'REJECTED_PROOF')
             } else if (!cancel) {
                 setTimeout(() => {
-                    this.pollVerification(selectedVerificationOptionId);
+                    this.pollVerification(this.selectedVerificationOptionId);
                 }, pollInterval);
             }
         } catch (e) {
@@ -155,7 +155,7 @@ export default class AgencyQR extends React.Component<QRProps, QRState> {
     }
 
     startVerification = () => {
-        if (this.state.verifying || ('false' === this.state.agent_connected)) {
+        if (this.state.verifying || !this.state.agent_connected) {
             notify.show(I18n.getKey('QR_NO_CONNECTION_NOTIFY'), 'error', 3000);
         } else {
             this.setState({
@@ -172,14 +172,14 @@ export default class AgencyQR extends React.Component<QRProps, QRState> {
     }
 
     acceptProof(verificationData: any) {
-        window.localStorage.setItem('personalInfo', JSON.stringify(verificationData));
+        this.props.store.set('personalInfo', verificationData);
         this.dispatch({type: FlowDispatchTypes.NEXT});
     }
 
     verify = async () => {
         try {
             const id: string = this.settleConnectionId();
-            const verification: any = await this.agent.sendVerification(id, profile);
+            const verification: any = await this.agent.sendVerification(id, this.profile);
             this.pollVerification(verification);
         } catch (e) {
             console.log(e);
@@ -221,13 +221,13 @@ export default class AgencyQR extends React.Component<QRProps, QRState> {
     }
 
     resetFlow = (): void => {
-        window.localStorage.removeItem('connection_id');
-        window.localStorage.removeItem('agent_connected');
+        this.props.store.set('connection_id', '');
+        this.props.store.set('agent_connected', false);
         this.setState({
             isConnectionReady: false,
             verifying: false,
             connectionId: '',
-            agent_connected: 'false'
+            agent_connected: false
         }, () => this.startProcess(true));
     }
 
@@ -307,7 +307,7 @@ export default class AgencyQR extends React.Component<QRProps, QRState> {
     render() {
         const {isConnectionReady, verifying} = this.state;
         return (
-            <div id={selectedVerificationOptionId} className="flex-block column">
+            <div id={this.selectedVerificationOptionId} className="flex-block column">
                 <Grid container
                     direction="column"
                     justify="center"

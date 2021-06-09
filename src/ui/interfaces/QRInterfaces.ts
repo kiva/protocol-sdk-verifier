@@ -1,6 +1,7 @@
 import {ProofRequestProfile} from "./VerificationRequirementProps";
+import ICommonProps from './ICommonProps';
 
-export interface QRProps {
+export interface QRProps extends ICommonProps {
     setConnectionId(id: string): Promise<void>,
     verifyConnection(established: boolean): Promise<void>,
     connectionId: string,
@@ -15,7 +16,7 @@ export interface QRState {
     retrievingInviteUrl: boolean,
     verifying: boolean,
     isConnectionReady: boolean,
-    agent_connected: string,
+    agent_connected: boolean,
     connectionId: string
 }
 

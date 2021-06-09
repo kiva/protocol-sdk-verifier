@@ -8,16 +8,14 @@ import I18n from '../utils/I18n';
 import '../css/Common.css';
 import '../css/ConfirmationScreen.css';
 
-import {CredentialKeyFieldState} from '../interfaces/ConfirmationProps';
+import {CredentialKeyFieldState, ConfirmationProps} from '../interfaces/ConfirmationProps';
 
 import FlowDispatchContext from '../contexts/FlowDispatchContext';
 import FlowDispatchTypes from '../enums/FlowDispatchTypes';
 
 import {CONSTANTS} from "../../constants/constants";
 
-// import {flowController} from "../KernelContainer";
-
-export default class ConfirmationScreen extends React.Component {
+export default class ConfirmationScreen extends React.Component<ConfirmationProps> {
 
     static contextType = FlowDispatchContext;
 

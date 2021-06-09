@@ -48,7 +48,7 @@ export default class VerificationRequirementScreen extends React.Component<Verif
             const options = await this.agent.fetchProofOptions();
             this.setState({
                 proofOptions: options
-            }, () => window.localStorage.setItem('profile', JSON.stringify(this.state.proofOptions[0])));
+            }, () => this.props.store.set('profile', this.state.proofOptions[0]));
         } catch (error) {
             this.setState({proofOptionsError: `${I18n.getKey('PROOFS_ERROR')} ${error}`})
         } finally {
@@ -62,8 +62,8 @@ export default class VerificationRequirementScreen extends React.Component<Verif
         const option = this.state.proofOptions[index];
         this.setState({
             verificationRequired: index
-        })
-        window.localStorage.setItem('profile', JSON.stringify(option));
+        });
+        this.props.store.set('profile', option);
     };
 
     render() {

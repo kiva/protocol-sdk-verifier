@@ -23,7 +23,7 @@ export default class EmailScreen extends React.Component<EmailProps, EmailState>
     constructor(props: EmailProps) {
         super(props);
         this.state = {
-            email: window.localStorage.getItem('email') || ''
+            email: this.props.store.get('email', '')
         }
     }
 
@@ -33,7 +33,7 @@ export default class EmailScreen extends React.Component<EmailProps, EmailState>
 
     handleInputChange = () => (e: any) => {
         const email: string = e.target.value;
-        window.localStorage.setItem('email', email);
+        this.props.store.set('email', email);
         this.setState({email});
     }
 

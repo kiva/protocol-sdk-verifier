@@ -30,29 +30,31 @@ const SDK: GuardianSDK = GuardianSDK.init({
     endpoint: '/v2/kiva/api/guardian/verify',
     auth_method: 'SMS'
 });
-const profileData: string = window.localStorage.getItem('profile') || JSON.stringify({
-    comment: '',
-    proof_request: {},
-    schema_id: ''
-});
-const profile: ProofRequestProfile = JSON.parse(profileData);
 
 export default class SMSOTPScreen extends React.Component<SMSProps, OTPState> {
 
-    private email: string = window.localStorage.getItem('email') || '';
+    private email: string;
+    private profile: ProofRequestProfile;
 
     constructor(props: SMSProps) {
         super(props);
         this.state = {
-            phoneNumber: window.localStorage.getItem('phoneNumber') || '',
-            smsSent: 'true' === window.localStorage.getItem('smsSent') || false,
-            phoneScreen: window.localStorage.getItem('phoneScreen') || 'phoneInput'
-        }
+            phoneNumber: this.props.store.get('phoneNumber', ''),
+            smsSent: this.props.store.get('smsSent', false),
+            phoneScreen: this.props.store.get('phoneScreen', 'phoneInput')
+        };
+
+        this.email = this.props.store.get('email', '', 'email');
+        this.profile = this.props.store.get('profile', {
+            comment: '',
+            proof_request: {},
+            schema_id: ''
+        }, 'verificationRequirement');
     }
 
     setContainerState = (data: SMSData): void => {
         for (let key in data) {
-            window.localStorage.setItem(key, data[key].toString());
+            this.props.store.set(key, data[key]);
         }
         this.setState(data);
     };
@@ -64,7 +66,8 @@ export default class SMSOTPScreen extends React.Component<SMSProps, OTPState> {
                 setContainerState={this.setContainerState}
                 smsSent={this.state.smsSent}
                 email={this.email}
-                profile={profile}
+                profile={this.profile}
+                store={this.props.store}
             />
         );
     }
@@ -76,7 +79,8 @@ export default class SMSOTPScreen extends React.Component<SMSProps, OTPState> {
                 email={this.email}
                 smsSent={this.state.smsSent}
                 setContainerState={this.setContainerState}
-                profile={profile}
+                profile={this.profile}
+                store={this.props.store}
             />
         );
     }
@@ -292,7 +296,7 @@ class OTPScreen extends React.Component<OTPScreenProps, OTPInputState> {
     };
 
     handleEkycSuccess = (personalInfo: any) => {
-        window.localStorage.setItem('personalInfo', JSON.stringify(personalInfo));
+        this.props.store.set('personalInfo', personalInfo);
         setTimeout(() => {
             this.dispatch({type: FlowDispatchTypes.NEXT});
         }, 1000);

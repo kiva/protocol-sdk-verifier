@@ -1,4 +1,6 @@
-export interface ConfirmationProps {}
+import ICommonProps from './ICommonProps';
+
+export interface ConfirmationProps extends ICommonProps {}
 
 interface CredentialKeyDefinition {
     name: string,

@@ -15,18 +15,18 @@ import FlowDispatchTypes from '../enums/FlowDispatchTypes';
 
 import "../css/AuthOptionMenu.css";
 
-import {AuthOptionState, MenuOptionProps} from "../interfaces/AuthOptionInterfaces";
+import {AuthOptionProps, AuthOptionState, MenuOptionProps} from "../interfaces/AuthOptionInterfaces";
 
 import I18n from '../utils/I18n';
 
-export default class AuthenticationOptionMenu extends React.Component<{}, AuthOptionState> {
+export default class AuthenticationOptionMenu extends React.Component<AuthOptionProps, AuthOptionState> {
 
     static contextType = FlowDispatchContext;
     private dispatch: any;
 
     constructor(props: any) {
         super(props);
-        const storedOption: number = parseInt(window.localStorage.getItem('authIndex') || '0');
+        const storedOption: number = this.props.authIndex;
         this.state = {
             optionSelected: storedOption
         }
@@ -37,12 +37,10 @@ export default class AuthenticationOptionMenu extends React.Component<{}, AuthOp
     }
 
     selectOption = (optionSelected: number): void => {
-
         this.dispatch({
             type: FlowDispatchTypes.SET_AUTH_METHOD,
             payload: optionSelected
         });
-
         this.setState({optionSelected});
     };
 

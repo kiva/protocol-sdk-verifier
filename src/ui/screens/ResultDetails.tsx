@@ -18,10 +18,10 @@ const itemList: any = {};
 
 export default class ResultDetails extends React.Component<DetailsProps> {
 
-    private personalInfo: any = JSON.parse(window.localStorage.getItem('personalInfo') || '');
+    private personalInfo: any = this.props.store.get('personalInfo', {}, this.props.prevScreen);
 
     componentDidMount() {
-        window.localStorage.clear();
+        this.props.store.reset();
         this.dispatchEkycComplete();
     }
 

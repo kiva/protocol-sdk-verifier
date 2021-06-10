@@ -5,16 +5,14 @@ import FlowDispatchContext from '../contexts/FlowDispatchContext';
 import {Flow} from '../interfaces/FlowSelectorInterfaces';
 import {CONSTANTS} from '../../constants/constants';
 
-import {ComponentStoreGet, ComponentStoreSet, ComponentStoreMethods, FlowAction, ComponentStore, ComponentMap} from '../interfaces/FlowRouterInterfaces';
+import {ComponentStoreMethods, FlowAction, ComponentMap} from '../interfaces/FlowRouterInterfaces';
+import useComponentStore from './useComponentStore';
 
 const options: AuthOption[] = CONSTANTS.verification_options;
 const useMenu: boolean = options.length > 1;
 
-// let flow: Flow;
-
 const FlowController: React.FC<{}> = () => {
     const flow = useRef<Flow>(createFlow(0));
-    const componentStore = useRef<ComponentStore>(initComponentStore());
 
     const [state, dispatch] = useReducer(flowReducer, {
         step: 'confirmation',
@@ -23,17 +21,12 @@ const FlowController: React.FC<{}> = () => {
 
     const prevStep: string = flow.current[state.step]![FlowDispatchTypes.BACK] ?? '';
 
-    let TheComponent = renderScreen(state.step),
-        componentStoreMethods: ComponentStoreMethods = createComponentStoreConnection(state.step);
+    let TheComponent = renderScreen(state.step);
+    let componentStoreMethods: ComponentStoreMethods = useComponentStore(state.step);
 
     useEffect(() => {
         flow.current = createFlow(state.authIndex);
     }, [state.authIndex]);
-
-    useEffect(() => {
-        // eslint-disable-next-line
-        componentStoreMethods = createComponentStoreConnection(state.step);
-    }, [state.step, createComponentStoreConnection]);
 
     function flowReducer(state: any, action: FlowAction): any {
         const {type, payload} = action;
@@ -86,34 +79,6 @@ const FlowController: React.FC<{}> = () => {
         const component: any = React.lazy(() => import('../screens/' + componentMap[step]));
 
         return component;
-    }
-
-    // TODO: Make into a hook and inject the component store as a parameter
-    function createComponentStoreConnection(step: string) {
-        const get: ComponentStoreGet = (dataKey: string, dfault?: any, component?: string) => {
-            // This is equivalent to component ??= step, but that broke the compiler
-            component ?? (component = step);
-            dfault ?? (dfault = undefined);
-
-            return (componentStore.current[component] && componentStore.current[component][dataKey]) ?? dfault;
-        };
-
-        const set: ComponentStoreSet = (dataKey: string, value: any) => {
-            if (!componentStore.current[step]) {
-                componentStore.current[step] = {};
-            }
-
-            componentStore.current[step] = {
-                ...componentStore.current[step],
-                [dataKey]: value
-            };
-        };
-
-        const reset = () => {
-            componentStore.current = initComponentStore();
-        };
-
-        return {get, set, reset};
     }
 
     return (
@@ -193,13 +158,4 @@ function createInitialSteps(index: number) {
     }
 
     return ret;
-}
-
-function initComponentStore(): ComponentStore {
-    return {
-        menu: {},
-        confirmation: {},
-        verificationRequirement: {},
-        details: {}
-    };
 }

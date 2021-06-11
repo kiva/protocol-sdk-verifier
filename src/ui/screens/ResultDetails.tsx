@@ -23,7 +23,7 @@ export default class ResultDetails extends React.Component<DetailsProps> {
             let piiString = val;
             const dataKey = _.findKey(CredentialKeys, (item) => {return item.name === key});
             if (dataKey && CredentialKeys[dataKey] && CredentialKeys[dataKey].dataType === "date") {
-                piiString = new Date(Number(val)).toLocaleDateString(
+                piiString = new Date(Number(val)*1000).toLocaleDateString(
                     'en-gb',
                     {
                         year: 'numeric',

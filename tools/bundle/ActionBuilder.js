@@ -1,9 +1,6 @@
 const actions = {
     // The following two Actions are required for hosted iframes
-    reset: {
-        personalInfo: "",
-        step: "confirmation"
-    },
+    reset: {},
     enableStandalone: {
         isStandalone: true
     }

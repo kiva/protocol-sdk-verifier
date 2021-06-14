@@ -8,15 +8,25 @@ import I18n from '../utils/I18n';
 import '../css/Common.css';
 import '../css/ConfirmationScreen.css';
 
-import {ConfirmationProps, CredentialKeyFieldState} from '../interfaces/ConfirmationProps';
+import {CredentialKeyFieldState, ConfirmationProps} from '../interfaces/ConfirmationProps';
+
+import FlowDispatchContext from '../contexts/FlowDispatchContext';
+import FlowDispatchTypes from '../enums/FlowDispatchTypes';
 
 import {CONSTANTS} from "../../constants/constants";
 
-import {flowController} from "../KernelContainer";
-
 export default class ConfirmationScreen extends React.Component<ConfirmationProps> {
+
+    static contextType = FlowDispatchContext;
+
+    consent = (): void => {
+        const dispatch = this.context();
+        const type: string = FlowDispatchTypes.NEXT;
+        dispatch({type});
+    }
+
     render() {
-        const integrationName = this.props.integrationName;
+        const integrationName = I18n.getKey('SITE_TITLE');
         return <div className="Confirmation screen">
             <Grid container
                 direction="column"
@@ -43,7 +53,7 @@ export default class ConfirmationScreen extends React.Component<ConfirmationProp
                 <Grid item>
                     <Button
                         className="accept"
-                        onClick={() => flowController.goTo('NEXT')}>
+                        onClick={() => this.consent()}>
                         {I18n.getKey('ACCEPT')}
                     </Button>
                 </Grid>

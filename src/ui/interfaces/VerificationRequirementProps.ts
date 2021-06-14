@@ -1,7 +1,6 @@
-export interface VerificationRequirementProps {
-  integrationName: string,
-  setProfile: Function
-}
+import ICommonProps from './ICommonProps';
+
+export interface VerificationRequirementProps extends ICommonProps {}
 
 export interface VerificationRequirementState {
   verificationRequired: number,

@@ -17,12 +17,15 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import {VerificationRequirementProps, VerificationRequirementState} from '../interfaces/VerificationRequirementProps';
-import {flowController} from "../KernelContainer";
 import auth from '../utils/AuthService';
 import _ from 'lodash';
+import FlowDispatchContext from '../contexts/FlowDispatchContext';
+import FlowDispatchTypes from '../enums/FlowDispatchTypes';
 
 export default class VerificationRequirementScreen extends React.Component<VerificationRequirementProps, VerificationRequirementState> {
     public readonly agent: IAgent;
+    static contextType = FlowDispatchContext;
+    private dispatch: any;
 
     constructor(props:any) {
         super(props);
@@ -36,13 +39,16 @@ export default class VerificationRequirementScreen extends React.Component<Verif
         this.setProofOptions();
     }
 
+    componentDidMount() {
+        this.dispatch = this.context();
+    }
+
     async setProofOptions() {
         try {
             const options = await this.agent.fetchProofOptions();
             this.setState({
                 proofOptions: options
-            });
-            this.props.setProfile(this.state.proofOptions[0]);
+            }, () => this.props.store.set('profile', this.state.proofOptions[0]));
         } catch (error) {
             this.setState({proofOptionsError: `${I18n.getKey('PROOFS_ERROR')} ${error}`})
         } finally {
@@ -56,8 +62,8 @@ export default class VerificationRequirementScreen extends React.Component<Verif
         const option = this.state.proofOptions[index];
         this.setState({
             verificationRequired: index
-        })
-        this.props.setProfile(option);
+        });
+        this.props.store.set('profile', option);
     };
 
     render() {
@@ -123,14 +129,14 @@ export default class VerificationRequirementScreen extends React.Component<Verif
                     <Grid item>
                         <Button
                             className="back"
-                            onClick={() => flowController.goTo('BACK')}>
+                            onClick={() => this.dispatch({type: FlowDispatchTypes.BACK})}>
                             {I18n.getKey('BACK')}
                         </Button>
                     </Grid>
                     <Grid item>
                         <Button
                             className="accept"
-                            onClick={() => flowController.goTo('NEXT')}>
+                            onClick={() => this.dispatch({type: FlowDispatchTypes.NEXT})}>
                             {I18n.getKey('CONTINUE')}
                         </Button>
                     </Grid>

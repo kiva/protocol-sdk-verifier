@@ -16,10 +16,11 @@ import {CONSTANTS} from "../../constants/constants";
 import I18n from '../utils/I18n';
 import GuardianSDK from '../utils/GuardianSDK';
 import auth from '../utils/AuthService';
-
-import {flowController} from "../KernelContainer";
+import FlowDispatchContext from '../contexts/FlowDispatchContext';
+import FlowDispatchTypes from '../enums/FlowDispatchTypes';
 
 import {PhoneScreenProps, SMSData, SMSProps, OTPState, PhoneNumberInputProps, OTPInputProps, SMSStatusProps, SMSButtonProps, PhoneState, OTPInputState, OTPScreenProps, SMSPostBody} from "../interfaces/SMSOTPInterfaces";
+import {ProofRequestProfile} from '../interfaces/VerificationRequirementProps';
 
 import "../css/SMSOTPScreen.css";
 import '../css/DialogBody.css';
@@ -32,17 +33,29 @@ const SDK: GuardianSDK = GuardianSDK.init({
 
 export default class SMSOTPScreen extends React.Component<SMSProps, OTPState> {
 
+    private email: string;
+    private profile: ProofRequestProfile;
+
     constructor(props: SMSProps) {
         super(props);
         this.state = {
-            phoneNumber: props.phoneNumber,
-            smsSent: props.smsSent,
-            phoneScreen: props.phoneScreen
-        }
+            phoneNumber: this.props.store.get('phoneNumber', ''),
+            smsSent: this.props.store.get('smsSent', false),
+            phoneScreen: this.props.store.get('phoneScreen', 'phoneInput')
+        };
+
+        this.email = this.props.store.get('email', '', 'email');
+        this.profile = this.props.store.get('profile', {
+            comment: '',
+            proof_request: {},
+            schema_id: ''
+        }, 'verificationRequirement');
     }
 
     setContainerState = (data: SMSData): void => {
-        this.props.setSmsInfo(data);
+        for (let key in data) {
+            this.props.store.set(key, data[key]);
+        }
         this.setState(data);
     };
 
@@ -52,8 +65,9 @@ export default class SMSOTPScreen extends React.Component<SMSProps, OTPState> {
                 phoneNumber={this.state.phoneNumber}
                 setContainerState={this.setContainerState}
                 smsSent={this.state.smsSent}
-                email={this.props.email}
-                profile={this.props.profile}
+                email={this.email}
+                profile={this.profile}
+                store={this.props.store}
             />
         );
     }
@@ -62,10 +76,11 @@ export default class SMSOTPScreen extends React.Component<SMSProps, OTPState> {
         return (
             <OTPScreen
                 phoneNumber={this.state.phoneNumber}
-                email={this.props.email}
+                email={this.email}
                 smsSent={this.state.smsSent}
                 setContainerState={this.setContainerState}
-                profile={this.props.profile}
+                profile={this.profile}
+                store={this.props.store}
             />
         );
     }
@@ -100,6 +115,10 @@ export default class SMSOTPScreen extends React.Component<SMSProps, OTPState> {
 }
 
 class PhoneNumberScreen extends React.Component<PhoneScreenProps, PhoneState> {
+
+    static contextType = FlowDispatchContext;
+    private dispatch: any;
+
     constructor(props: PhoneScreenProps) {
         super(props);
         this.state = {
@@ -107,6 +126,10 @@ class PhoneNumberScreen extends React.Component<PhoneScreenProps, PhoneState> {
             error: "",
             requestInProgress: false
         };
+    }
+
+    componentDidMount() {
+        this.dispatch = this.context();
     }
 
     handlePhoneNumberEnter = (keyCode: number): void => {
@@ -190,7 +213,7 @@ class PhoneNumberScreen extends React.Component<PhoneScreenProps, PhoneState> {
                     handleEnter={this.handlePhoneNumberEnter}
                 />
                 <SMSScreenButtons
-                    onClickBack={() => flowController.goTo('BACK')}
+                    onClickBack={() => this.dispatch({type: FlowDispatchTypes.BACK})}
                     onSubmit={() => this.beginTwilioRequest()}
                 />
             </div>
@@ -233,6 +256,9 @@ class PhoneNumberScreen extends React.Component<PhoneScreenProps, PhoneState> {
 
 class OTPScreen extends React.Component<OTPScreenProps, OTPInputState> {
 
+    static contextType = FlowDispatchContext;
+    private dispatch: any;
+
     constructor(props: OTPScreenProps) {
         super(props);
         this.state = {
@@ -241,6 +267,10 @@ class OTPScreen extends React.Component<OTPScreenProps, OTPInputState> {
             smsError: "",
             idVerified: false
         };
+    }
+
+    componentDidMount() {
+        this.dispatch = this.context();
     }
 
     getOtpValue = (): number => {
@@ -266,8 +296,9 @@ class OTPScreen extends React.Component<OTPScreenProps, OTPInputState> {
     };
 
     handleEkycSuccess = (personalInfo: any) => {
+        this.props.store.set('personalInfo', personalInfo);
         setTimeout(() => {
-            flowController.goTo('NEXT', {personalInfo});
+            this.dispatch({type: FlowDispatchTypes.NEXT});
         }, 1000);
     };
 

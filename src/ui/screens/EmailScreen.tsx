@@ -7,8 +7,8 @@ import Button from '@material-ui/core/Button';
 import FormControl from '@material-ui/core/FormControl';
 
 import I18n from '../utils/I18n';
-
-import {flowController} from "../KernelContainer";
+import FlowDispatchContext from '../contexts/FlowDispatchContext';
+import FlowDispatchTypes from '../enums/FlowDispatchTypes';
 
 import {EmailProps, EmailState} from '../interfaces/EmailInterfaces';
 
@@ -16,15 +16,24 @@ import '../css/Common.css';
 import '../css/Email.css';
 
 export default class EmailScreen extends React.Component<EmailProps, EmailState> {
+
+    static contextType = FlowDispatchContext;
+    private dispatch: any;
+
     constructor(props: EmailProps) {
         super(props);
         this.state = {
-            email: props.email
+            email: this.props.store.get('email', '')
         }
+    }
+
+    componentDidMount() {
+        this.dispatch = this.context();
     }
 
     handleInputChange = () => (e: any) => {
         const email: string = e.target.value;
+        this.props.store.set('email', email);
         this.setState({email});
     }
 
@@ -33,8 +42,7 @@ export default class EmailScreen extends React.Component<EmailProps, EmailState>
         if (!this.state.email) {
             notify.show(I18n.getKey('NO_EMAIL'), 'error', 3000);
         } else {
-            this.props.setEmail(this.state.email);
-            flowController.goTo('NEXT');
+            this.dispatch({type: FlowDispatchTypes.NEXT});
         }
     }
 
@@ -57,6 +65,7 @@ export default class EmailScreen extends React.Component<EmailProps, EmailState>
                                     id="email-input"
                                     data-cy="email-input"
                                     label={this.state.email.trim() === "" ? "Email" : ""}
+                                    value={this.state.email}
                                     onChange={this.handleInputChange()}
                                     inputProps={{'aria-label': 'bare'}}
                                     margin="normal"
@@ -68,7 +77,7 @@ export default class EmailScreen extends React.Component<EmailProps, EmailState>
                             <Button
                                 className="secondary"
                                 id="back"
-                                onClick={() => flowController.goTo('BACK')}>
+                                onClick={() => this.dispatch({type: FlowDispatchTypes.BACK})}>
                                 {I18n.getKey('BACK')}
                             </Button>
                             <Button

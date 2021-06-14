@@ -1,3 +1,5 @@
+import ICommonProps from './ICommonProps';
+
 export interface AuthOption {
     id: string,
     title: string,
@@ -17,10 +19,8 @@ export interface MenuOptionProps {
     option_index: number
 }
 
-export interface AuthOptionProps {
-    verification_opts: AuthOption[],
-    setNewAuthType: (index: number) => void,
-    authIndex: number
+export interface AuthOptionProps extends ICommonProps {
+
 }
 
 export interface AuthOptionState {

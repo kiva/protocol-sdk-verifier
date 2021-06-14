@@ -18,7 +18,23 @@ const itemList: any = {};
 
 export default class ResultDetails extends React.Component<DetailsProps> {
 
-    getPIIDisplayString(key:string, val:string) {
+    private personalInfo: any = this.props.store.get('personalInfo', {}, this.props.prevScreen);
+
+    componentDidMount() {
+        this.props.store.reset();
+        this.dispatchEkycComplete();
+    }
+
+    dispatchEkycComplete = () => {
+        const sendingObject = {
+            key: 'kycCompleted',
+            detail: this.personalInfo
+        };
+        console.info("Sending kycCompleted", sendingObject);
+        window.parent.postMessage(sendingObject, "*");
+    }
+
+    getPIIDisplayString(key: string, val: string) {
         try {
             let piiString = val;
             const dataKey = _.findKey(CredentialKeys, (item) => {return item.name === key});
@@ -79,8 +95,8 @@ export default class ResultDetails extends React.Component<DetailsProps> {
             if (isWide) {
                 wideKeys.push(name);
             }
-            if (rendered && this.props.personalInfo.hasOwnProperty(key)) {
-                itemList[name] = this.props.personalInfo[key];
+            if (rendered && this.personalInfo.hasOwnProperty(key)) {
+                itemList[name] = this.personalInfo[key];
             }
         }
     }
@@ -99,7 +115,7 @@ export default class ResultDetails extends React.Component<DetailsProps> {
     }
 
     render() {
-        const pictureData: string = this.createPhotoData(this.props.personalInfo["photo~attach"]);
+        const pictureData: string = this.createPhotoData(this.personalInfo["photo~attach"]);
 
         return <Paper className="ProfileCardContainer"
             elevation={1}>
@@ -111,8 +127,8 @@ export default class ResultDetails extends React.Component<DetailsProps> {
                         src={pictureData}/>
                     {false && <Button
                         className="export-profile"
-                        onClick={this.props.exportAction}>
-                        {this.props.actionButtonCaption}
+                        onClick={this.dispatchEkycComplete}>
+                        {I18n.getKey('EXPORT_PROFILE')}
                     </Button>}
                     {this.renderFields(I18n.getKey('CREDENTIALING_AGENCY'), itemList)}
                     <div className="important-buttons">

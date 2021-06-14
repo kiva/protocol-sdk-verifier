@@ -7,12 +7,10 @@ function useComponentStore(step: string): ComponentStoreMethods {
     const componentStore = useRef<ComponentStore>(initComponentStore());
 
     const get: ComponentStoreGet = (dataKey: string, dfault?: any, uniqueComponentKey?: string) => {
-        !uniqueComponentKey && (uniqueComponentKey = step);
+        if (!uniqueComponentKey) {
+            uniqueComponentKey = step;
+        }
 
-        // This is equivalent to component ??= step, but that broke the compiler
-        dfault ?? (dfault = undefined);
-
-        console.log(componentStore.current);
         return (componentStore.current[uniqueComponentKey] && componentStore.current[uniqueComponentKey][dataKey]) ?? dfault;
     };
 

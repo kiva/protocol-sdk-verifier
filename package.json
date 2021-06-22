@@ -54,7 +54,7 @@
     "compile": "tsc",
     "build-css": "node-sass-chokidar src/ -o src/",
     "watch-css": "node-sass-chokidar src/ -o src/ --watch --recursive",
-    "start-js": "react-scripts start",
+    "start-js": "PORT=7567 react-scripts start",
     "start": "npm-run-all -p statFileGen watch-css start-js",
     "build-js": "react-scripts build",
     "build": "sh ./tools/bundle/create_bundle.sh ${CONF_FILE:-config/kiva.json}",

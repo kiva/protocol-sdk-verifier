@@ -6,11 +6,59 @@
     },
     "Standard": {
         "back": "Back",
+        "next": "Next",
         "accept": "Accept",
         "verify": "Verify",
+        "required": "required",
         "verifying": "Verifying",
         "continue": "Continue",
-        "poweredBy": "Powered by"
+        "poweredBy": "Powered by",
+        "scanFp": "Scan Fingerprint",
+        "voterId": "Voter ID",
+        "nationalId": "National ID"
+    },
+    "Fingers": {
+        "finger": "finger",
+        "rightThumb": "Right Thumb",
+        "rightIndex": "Right Index",
+        "rightMiddle": "Right Middle",
+        "rightRing": "Right Ring",
+        "rightLittle": "Right Little",
+        "leftThumb": "Left Thumb",
+        "leftIndex": "Left Index",
+        "leftMiddle": "Left Middle",
+        "leftRing": "Left Ring",
+        "leftLittle": "Left Little",
+        "rightThumb_full": "Right Thumb",
+        "rightIndex_full": "Right Index {{finger}}",
+        "rightMiddle_full": "Right Middle {{finger}}",
+        "rightRing_full": "Right Ring {{finger}}",
+        "rightLittle_full": "Right Little {{finger}}",
+        "leftThumb_full": "Left Thumb",
+        "leftIndex_full": "Left Index {{finger}}",
+        "leftMiddle_full": "Left Middle {{finger}}",
+        "leftRing_full": "Left Ring {{finger}}",
+        "leftLittle_full": "Left Little {{finger}}"
+    },
+    "PII": {
+        "nationalId": "National ID",
+        "voterId": "Voter ID",
+        "voterIdIssueDate": "Voter ID Issue Date",
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "birthDate": "Date of Birth",
+        "job": "Occupation",
+        "phoneNo": "Phone Number",
+        "residentialAddress": "Residential Address",
+        "permanentAddress": "Permanent Address",
+        "maritalStatus": "Marital Status",
+        "momsName": "Mother's Name",
+        "dadsName_full": "Father's Full Name",
+        "signature": "Signature",
+        "birthPlace": "Place of Birth",
+        "firstName_formal": "Given Name",
+        "lastName_formal": "Surname",
+        "sex": "Sex"
     },
     "Errors": {
         "unknown": "An unknown error occurred.",
@@ -28,8 +76,50 @@
             "noInput": "Please enter your email in the field below"
         },
         "input": {
+            "nationalIdInput": "National ID must be eight characters long (capital letters and numbers only)",
+            "voterIdInput": "Voter ID must be seven digits",
+            "dateInput": "Please enter a valid date",
+            "unsetID": "You must set an ID value",
+            "missingNames": "You must provide your first and last names",
+            "missingFuzzySearchData": "Customer must provide their birthdate, their mother's first name or their father's first name",
+            "inputLength": "Input must be between {{minimum}} and {{maximum}} characters",
             "missingPhoneNumber": "Please enter a valid phone number",
             "invalidOTP": "Please provide the full six-digit passcode"
+        },
+        "kyc": {
+            "default": "We couldn't complete the request. Please try again. If the problem persists contact Support.",
+            "NetworkAborted": "The request couldn’t go through. Please check your internet connection and try again.",
+            "SDKAccessDenied": "The request could not be authenticated. Please sign again in your EKYC DesktopTool",
+            "NoCitizenFound": "No record found. Please use an alternative KYC process.",
+            "FingerprintNoMatch": "Fingerprint did not match the stored records for the citizen. Please try again or use an alternative KYC process.",
+            "FingerprintSuggestions": "The fingerprint captured did not match the stored records. Please try again using the {{fingers}} finger positions.",
+            "FingerprintLowQuality": "Fingerprint captured is too low quality to be used for matching. Please try again.",
+            "FingerprintMissingNotCaptured": "Fingerprints are not captured in the registry. Please use an alternative KYC process.",
+            "FingerprintMissingUnableToPrint": "Fingerprints are not captured in the registry. Please try a different finger or use an alternative KYC process.",
+            "FingerprintMissingAmputation": "Fingerprints are not captured in the registry. Please try a different finger or use an alternative KYC process.",
+            "InvalidFilters": "The selected finger isn't supported in this environment. Please contact your IT team and use an alternative KYC process.",
+            "ServiceError": "An unexpected service error occurred. Please contact your IT team and use an alternative KYC process.",
+            "InternalServerError": "An unexpected service error occurred. Please contact your IT team and use an alternative KYC process.",
+            "RegistryConnectionError": "There was an error connecting to the NCRA’s registry. Please try again in 5 min.",
+            "InvalidData": "We could not verify the identity of the user. Please contact your IT team and use an alternative KYC process.",
+            "PDFGenerationError": "There was an error while processing the customer's information. Please contact your IT team and use an alternative KYC process.",
+            "InvalidDataFormat": "We could not verify the data provided. Please use an alternative KYC process. If the problem persists, please contact your IT team.",
+            "NoPhoneNumber": "The phone number registered may need to be updated in order to complete the authentication. Please try a different number or update the phone number.",
+            "PhoneNumberNoMatch": "The phone number registered may need to be updated in order to complete the authentication. Please try a different number or update the phone number.",
+            "SmsSendFailed": "The SMS with the one-time passcode failed to send. Please try again.",
+            "OtpNoMatch": "The request could not be authenticated. Please try again.",
+            "OtpExpired": "The code entered has expired. Please try again.",
+            "NoRequestNeeded": "The request failed because this authentication method does not require a request to be made."
+        },
+        "desktopTool": {
+            "scannerNotFound": "Fingerprint reader is not detected. Please make sure the fingerprint reader is plugged in or unplug the device and then plug it back in.",
+            "loginFailure": "You are not logged into the Desktop tool. Please make sure you are logged in.",
+            "deviceInUse": "A request is already in progress. Please wait for the request to complete.",
+            "invalidCredentials": "We were unable to verify the credentials of the operator. Please contact IT for support."
+        },
+        "retries": {
+            "readerNotFound": "The fingerprint reader is not detected, so you cannot proceed. Please make sure the reader is properly plugged in.",
+            "readerStillNotFound": "The fingerprint reader still could not be detected. Please restart the desktop tool and app."
         }
     },
     "ConfirmationScreen": {
@@ -63,11 +153,66 @@
         "buttons": {
             "exportProfile": "Export Profile",
             "printProfile": "Print Profile"
-        }
+        },
+        "credentialingAgency": "Kiva"
     },
     "Email": {
         "text": {
             "instructions": "Please enter your email"
+        }
+    },
+    "Dialog": {
+        "text": {
+            "idVerified": "Identity Verified",
+            "verifying": "Verifying",
+            "slowInternetWarning": "The internet connectivity is poor, so eKYC verification will take longer than normal."
+        },
+        "buttons": {
+            "tryAgain": "Try Again",
+            "continue": "Continue",
+            "exportProfile": "Export Profile",
+            "printProfile": "Print Profile"
+        }
+    },
+    "SearchMenuScreen": {
+        "text": {
+            "enterInfo": "Enter the customer's ID",
+            "unknownId": "Customer Doesn't Know ID"
+        },
+        "labels": {
+            "enterInput": "Enter a valid ID",
+            "idOptions": "ID options",
+            "nationalIdAbbrev": "NIN"
+        }
+    },
+    "AlternateSearchScreen": {
+        "text": {
+            "fuzzySearchInstructions": "Enter the first name and last name of the customer to look up the ID information. The customer’s date of birth, mother’s first name or father’s first name will also be needed. All fields may also be filled out for a stronger search.",
+            "enterFirstAndLast": "Enter customer {{first}} and {{last}}",
+            "enterDob": "Enter customer date of birth",
+            "enterParentsNames": "Enter Mother's or Father's First Name",
+            "requiredWithoutDob": "Required if DOB is not entered"
+        }
+    },
+    "ScanFingerprintScreen": {
+        "text": {
+            "placeFinger": "Place <strong>{{finger}}</strong> on the reader",
+            "changeFinger": "Use a different finger",
+            "recaptureFinger": "Recapture Fingerprint",
+            "cantUseFinger": "Customer unable to use fingerprints?"
+        }
+    },
+    "FingerSelectionScreen": {
+        "text": {
+            "selectNew": "Select a different digit",
+            "leaveFpSelect": "Go Back"
+        }
+    },
+    "SMSOTP": {
+        "text": {
+            "enterPhoneNumber": "Enter the customer's mobile number",
+            "enterOTP": "Enter the 6-digit code",
+            "smsSentTo": "An SMS was sent to"
         }
     }
 }

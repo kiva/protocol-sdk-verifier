@@ -8,46 +8,62 @@
     },
     "verification_options": [
         {
-            "id": "Kiva_QR",
+            "id": "FP_Scan",
             "title": "Mobile Wallet",
             "description": "Customer will use their wallet to establish a connection and provide credentials for proofs.",
             "guardian": false,
-            "sequence": ["agency_qr"]
-        },
-        {
-            "id": "SMS_OTP",
-            "title": "SMS",
-            "description": "Customer will verify their identity using a one-time password delivered via text message.",
-            "guardian": false,
-            "sequence": ["email_input", "smsotp"]
+            "sequence": [
+                "searchMenu",
+                "fpScan"
+            ]
         }
     ],
-    "credentialProof": "employee.proof.request.json",
+    "credentialProof": "identity.proof.request.json",
     "phoneIntls": {
         "only": false,
-        "countries": ["us"]
+        "countries": [
+            "us"
+        ]
     },
     "env": {
         "prod": {
             "actions": {
-                "includeOnly": ["reset", "enableStandalone"]
+                "includeOnly": [
+                    "reset",
+                    "enableStandalone"
+                ]
             },
             "permittedOrigins": "https://pro-cluster-kiva.web.app",
-            "permittedIframeHosts": ["https://www.kiva.org"],
-            "permittedOpenerOrigins": ["https://pro-cluster-kiva.web.app"],
+            "permittedIframeHosts": [
+                "https://www.kiva.org"
+            ],
+            "permittedOpenerOrigins": [
+                "https://pro-cluster-kiva.web.app"
+            ],
             "isProd": true
         },
         "sandbox": {
-            "inherits": ["prod"]
+            "inherits": [
+                "prod"
+            ]
         },
         "qa": {
             "controllerUrlBase": "https://sandbox-gateway.protocol-prod.kiva.org",
             "permittedOrigins": "http://localhost:8080,http://localhost:3000,https://www.kiva.org",
-            "permittedIframeHosts": ["https://www.kiva.org", "http://localhost:3000", "http://localhost:8080"],
-            "permittedOpenerOrigins": ["https://pro-cluster-kiva.web.app", "http://localhost:3000"]
+            "permittedIframeHosts": [
+                "https://www.kiva.org",
+                "http://localhost:3000",
+                "http://localhost:8080"
+            ],
+            "permittedOpenerOrigins": [
+                "https://pro-cluster-kiva.web.app",
+                "http://localhost:3000"
+            ]
         },
         "dev": {
-            "inherits": ["qa"]
+            "inherits": [
+                "qa"
+            ]
         }
     }
 }

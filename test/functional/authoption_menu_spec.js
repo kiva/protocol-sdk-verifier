@@ -14,9 +14,9 @@ describe('The Authentication Options Menu screen', () => {
         cy.contains('Continue').click();
     });
 
-    it('has two menu options for authenticating', () => {
+    it('has three menu options for authenticating', () => {
         cy.selectAuthMenuItem().should(menuItems => {
-            expect(menuItems.length).to.eql(2);
+            expect(menuItems.length).to.eql(3);
         });
     });
 
@@ -33,6 +33,11 @@ describe('The Authentication Options Menu screen', () => {
         cy.selectAuthMenuItem().eq(1).should('have.class', 'selected');
     });
 
+    it('changes the selection when the third menu item is clicked', () => {
+        cy.selectAuthMenuItem().eq(2).click();
+        cy.selectAuthMenuItem().eq(2).should('have.class', 'selected');
+    });
+
     it('displays the text from the configuration file correctly', () => {
         // First item
         cy.selectAuthMenuItem().eq(0).get('h2').should('contain', 'Mobile Wallet');
@@ -41,6 +46,10 @@ describe('The Authentication Options Menu screen', () => {
         // Second item
         cy.selectAuthMenuItem().eq(1).get('h2').should('contain', 'SMS');
         cy.selectAuthMenuItem().eq(1).get('p').should('contain', 'Customer will verify their identity using a one-time password delivered via text message.');
+
+        // Third item
+        cy.selectAuthMenuItem().eq(2).get('h2').should('contain', 'Fingerprint Scan');
+        cy.selectAuthMenuItem().eq(2).get('p').should('contain', 'Customer will verify their identity by scanning their fingerprint.');
     });
 
     it('successfully navigates to the QR scan page after clicking "Continue" when "Mobile Wallet" is selected', () => {
@@ -59,5 +68,11 @@ describe('The Authentication Options Menu screen', () => {
 
         // Done? Let's go back to menu screen
         cy.get('#back').click();
+    });
+
+    it('successfully navigates to the SearchMenu screen after clicking "Continue" when "Fingerprint Scan" is selected', () => {
+        cy.selectAuthMenuItem().eq(2).click();
+        cy.get('#select-auth-method').click();
+        cy.get('[data-cy="searchMenu"]').should('be.visible');
     });
 });

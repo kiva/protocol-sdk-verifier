@@ -1,11 +1,11 @@
-import React, {useEffect, useRef, useReducer, Suspense} from 'react';
+import React, { useEffect, useRef, useReducer, Suspense } from 'react';
 import FlowDispatchTypes from '../enums/FlowDispatchTypes';
-import {AuthOption} from '../interfaces/AuthOptionInterfaces';
+import { AuthOption } from '../interfaces/AuthOptionInterfaces';
 import FlowDispatchContext from '../contexts/FlowDispatchContext';
-import {Flow} from '../interfaces/FlowSelectorInterfaces';
-import {CONSTANTS} from '../../constants/constants';
+import { Flow } from '../interfaces/FlowSelectorInterfaces';
+import { CONSTANTS } from '../../constants/constants';
 
-import {ComponentStoreMethods, FlowAction, ComponentMap} from '../interfaces/FlowRouterInterfaces';
+import { ComponentStoreMethods, FlowAction, ComponentMap } from '../interfaces/FlowRouterInterfaces';
 import useComponentStore from './useComponentStore';
 
 const options: AuthOption[] = CONSTANTS.verification_options;
@@ -29,8 +29,8 @@ const FlowController: React.FC<{}> = () => {
     }, [state.authIndex]);
 
     function flowReducer(state: any, action: FlowAction): any {
-        const {type, payload} = action;
-        const {step} = state;
+        const { type, payload } = action;
+        const { step } = state;
         const theFlow: Flow = flow.current;
 
         if (!theFlow.hasOwnProperty(step)) throw new Error(`Referenced step '${step}' does not exist in the flow`);
@@ -73,7 +73,9 @@ const FlowController: React.FC<{}> = () => {
             agency_qr: 'AgencyQR',
             email_input: 'EmailScreen',
             smsotp: 'SMSOTPScreen',
-            verificationRequirement: 'VerificationRequirementScreen'
+            verificationRequirement: 'VerificationRequirementScreen',
+            fpScan: 'ScanFingerprintScreen',
+            searchMenu: 'SearchMenu'
         };
 
         const component: any = React.lazy(() => import('../screens/' + componentMap[step]));
@@ -90,7 +92,7 @@ const FlowController: React.FC<{}> = () => {
                     </div>
                 </div>
             </Suspense>
-        </FlowDispatchContext.Provider> 
+        </FlowDispatchContext.Provider>
     );
 }
 
@@ -119,7 +121,7 @@ function injectAuthMethod(index: number, flow: any) {
     foldSequence(currentPoint, sequence, flow);
 }
 
-function foldSequence(currentPoint: string , sequence: string[], flow: any) {
+function foldSequence(currentPoint: string, sequence: string[], flow: any) {
 
     for (let i = 1; i < sequence.length; i++) {
         let temp: string = currentPoint;

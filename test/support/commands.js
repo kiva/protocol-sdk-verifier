@@ -47,3 +47,20 @@ Cypress.Commands.add("otpInput", (inputCode) => {
         cy.get(selector).clear().type(inputCode[i]);
     }
 })
+
+Cypress.Commands.add('fpScanIntercept', function (delay) {
+    const response = {
+        body: {
+            FingerprintSensorSerialNumber: "Kiva-Device-Simulator",
+            TellerComputerUsername: "MAC",
+            success: true
+        }
+    };
+    if (!!delay) {
+        response.delay = delay;
+    }
+    cy.fixture('fingerprint.png', 'base64').then(function (fingerprint) {
+        response.body.ImageBase64 = 'data:image/png;base64,' + fingerprint;
+        cy.intercept('GET', 'http://localhost:9907/EKYC/Fingerprint', response).as('scannerData');
+    });
+})

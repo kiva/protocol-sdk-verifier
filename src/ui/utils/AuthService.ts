@@ -7,7 +7,7 @@ class AuthService {
 
     setToken(token: string): void {
         this.authToken = token;
-        this.setToken = (token: string) => {};
+        this.setToken = (token: string) => { };
     }
 
     getToken(): string {

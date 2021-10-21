@@ -17,3 +17,10 @@ jobs:
           start: npm run serve-build
           config: baseUrl=http://localhost:5000
           wait-on: 'http://localhost:5000'
+        env:
+          CONF_FILE: config/get_started.json
+      - uses: actions/upload-artifact@v2
+        if: ${{ failure() }}
+        with:
+          name: test-artifacts
+          path: ./cypress/screenshots

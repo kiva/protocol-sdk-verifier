@@ -19,3 +19,8 @@ jobs:
           wait-on: 'http://localhost:5000'
         env:
           CONF_FILE: config/get_started.json
+      - uses: actions/upload-artifact@v2
+        if: ${{ failure() }}
+        with:
+          name: test-artifacts
+          path: ./test/functional/images

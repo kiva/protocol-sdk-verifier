@@ -94,7 +94,7 @@ describe('The ScanFingerprint screen', function () {
             error: 'FR_NOT_CAPTURED',
         });
         cy.wait(1000);
-        cy.screenshot('pre_recapture.png');
+        cy.screenshot('images/pre_recapture.png');
         cy.get('[data-cy="recapture-fp"]', { timeout: 500 }).click();
         cy.get('[data-cy="fp-image"]', { timeout: 500 }).should(el => {
             expect(el.attr('src')).to.eq('/static/media/np_fingerprint_failed.eec8baf9.png');

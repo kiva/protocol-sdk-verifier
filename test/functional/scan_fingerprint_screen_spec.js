@@ -86,6 +86,7 @@ describe('The ScanFingerprint screen', function () {
         cy.get('[data-cy="fp-image"]', { timeout: 500 }).should(el => {
             expect(el.attr('src')).to.eq('data:image/png;base64,' + this.b64);
         });
+        cy.wait(500);
     });
 
     it('responds correctly when the scanner responds with FR_NOT_CAPTURED', function () {
@@ -93,8 +94,6 @@ describe('The ScanFingerprint screen', function () {
             success: false,
             error: 'FR_NOT_CAPTURED',
         });
-        cy.wait(1000);
-        cy.screenshot('pre_recapture');
         cy.get('[data-cy="recapture-fp"]', { timeout: 500 }).click();
         cy.get('[data-cy="fp-image"]', { timeout: 500 }).should(el => {
             expect(el.attr('src')).to.eq('/static/media/np_fingerprint_failed.eec8baf9.png');

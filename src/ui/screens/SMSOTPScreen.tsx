@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {notify} from "react-notify-toast";
+import { notify } from "react-notify-toast";
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
@@ -11,7 +11,7 @@ import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/bootstrap.css';
 
-import {CONSTANTS} from "../../constants/constants";
+import { CONSTANTS } from "../../constants/constants";
 
 import I18n from '../utils/I18n';
 import GuardianSDK from '../utils/GuardianSDK';
@@ -19,8 +19,8 @@ import auth from '../utils/AuthService';
 import FlowDispatchContext from '../contexts/FlowDispatchContext';
 import FlowDispatchTypes from '../enums/FlowDispatchTypes';
 
-import {PhoneScreenProps, SMSData, SMSProps, OTPState, PhoneNumberInputProps, OTPInputProps, SMSStatusProps, SMSButtonProps, PhoneState, OTPInputState, OTPScreenProps, SMSPostBody} from "../interfaces/SMSOTPInterfaces";
-import {ProofRequestProfile} from '../interfaces/VerificationRequirementProps';
+import { PhoneScreenProps, SMSData, SMSProps, OTPState, PhoneNumberInputProps, OTPInputProps, SMSStatusProps, SMSButtonProps, PhoneState, OTPInputState, OTPScreenProps, SMSPostBody } from "../interfaces/SMSOTPInterfaces";
+import { ProofRequestProfile } from '../interfaces/VerificationRequirementProps';
 
 import "../css/SMSOTPScreen.css";
 import '../css/DialogBody.css';
@@ -161,7 +161,7 @@ class PhoneNumberScreen extends React.Component<PhoneScreenProps, PhoneState> {
             device: {}
         };
     }
- 
+
     beginTwilioRequest = (): void => {
         if (this.state.phoneNumber) {
             const body: SMSPostBody = this.setPhoneNumberRequestBody();
@@ -197,8 +197,8 @@ class PhoneNumberScreen extends React.Component<PhoneScreenProps, PhoneState> {
                     status="progress"
                 />
                 <SMSScreenButtons
-                    onClickBack={() => {}}
-                    onSubmit={() => {}}
+                    onClickBack={() => { }}
+                    onSubmit={() => { }}
                 />
             </div>
         );
@@ -213,7 +213,7 @@ class PhoneNumberScreen extends React.Component<PhoneScreenProps, PhoneState> {
                     handleEnter={this.handlePhoneNumberEnter}
                 />
                 <SMSScreenButtons
-                    onClickBack={() => this.dispatch({type: FlowDispatchTypes.BACK})}
+                    onClickBack={() => this.dispatch({ type: FlowDispatchTypes.BACK })}
                     onSubmit={() => this.beginTwilioRequest()}
                 />
             </div>
@@ -233,7 +233,7 @@ class PhoneNumberScreen extends React.Component<PhoneScreenProps, PhoneState> {
                             error: ""
                         });
                     }}
-                    onSubmit={() => {}}
+                    onSubmit={() => { }}
                 />
             </div>
         );
@@ -287,18 +287,18 @@ class OTPScreen extends React.Component<OTPScreenProps, OTPInputState> {
     }
 
     handleOTPEntry = (index: number, value: string): void => {
-        const {otp} = this.state;
+        const { otp } = this.state;
         if (index >= 0 && index < 6) {
             otp[index] = value;
         }
 
-        this.setState({otp});
+        this.setState({ otp });
     };
 
     handleEkycSuccess = (personalInfo: any) => {
         this.props.store.set('personalInfo', personalInfo);
         setTimeout(() => {
-            this.dispatch({type: FlowDispatchTypes.NEXT});
+            this.dispatch({ type: FlowDispatchTypes.NEXT });
         }, 1000);
     };
 
@@ -338,7 +338,7 @@ class OTPScreen extends React.Component<OTPScreenProps, OTPInputState> {
                 requestInProgress: false,
                 idVerified: true
             }, () => this.handleEkycSuccess(data));
-        } catch (smsError) {
+        } catch (smsError: any) {
             this.setState({
                 smsError,
                 requestInProgress: false
@@ -404,7 +404,7 @@ class OTPScreen extends React.Component<OTPScreenProps, OTPInputState> {
                 />
                 <SMSScreenButtons
                     onClickBack={() => this.handleErrorBack()}
-                    onSubmit={() => {}}
+                    onSubmit={() => { }}
                 />
             </div>
         );
@@ -417,8 +417,8 @@ class OTPScreen extends React.Component<OTPScreenProps, OTPInputState> {
                     status="verifying"
                 />
                 <SMSScreenButtons
-                    onClickBack={() => {}}
-                    onSubmit={() => {}}
+                    onClickBack={() => { }}
+                    onSubmit={() => { }}
                 />
             </div>
         );
@@ -431,8 +431,8 @@ class OTPScreen extends React.Component<OTPScreenProps, OTPInputState> {
                     status="success"
                 />
                 <SMSScreenButtons
-                    onClickBack={() => {}}
-                    onSubmit={() => {}}
+                    onClickBack={() => { }}
+                    onSubmit={() => { }}
                 />
             </div>
         );
@@ -492,7 +492,7 @@ class SMSStatus extends React.Component<SMSStatusProps> {
     renderInProgress(text: string) {
         return (
             <div data-cy="sms-otp-in-progress" className="centered status-report">
-                <CircularProgress className="dialog-icon verifying"/>
+                <CircularProgress className="dialog-icon verifying" />
                 <Typography component="h2" variant="h4" gutterBottom className="status-text">
                     {text}
                 </Typography>
@@ -503,7 +503,7 @@ class SMSStatus extends React.Component<SMSStatusProps> {
     renderError() {
         return (
             <div className="centered status-report">
-                <ErrorIcon className="dialog-icon error"/>
+                <ErrorIcon className="dialog-icon error" />
                 <Typography id="instructions" component="h2" align="center" className="error-description">
                     {this.props.errorText}
                 </Typography>
@@ -514,7 +514,7 @@ class SMSStatus extends React.Component<SMSStatusProps> {
     renderVerified() {
         return (
             <div className="centered status-report">
-                <CheckCircleIcon className="dialog-icon verified"/>
+                <CheckCircleIcon className="dialog-icon verified" />
                 <Typography id="instructions" component="h2" align="center" className="status-text">
                     {I18n.getKey('ID_VERIFIED')}
                 </Typography>

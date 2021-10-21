@@ -1,7 +1,7 @@
 let kycData, initial;
 
-describe('The User Details screen...', function() {
-    before(function() {
+describe('The User Details screen...', function () {
+    before(function () {
         cy.window().then(win => {
             win.parent.addEventListener('message', (event) => {
                 kycData = event.data.detail;
@@ -47,7 +47,7 @@ describe('The User Details screen...', function() {
         });
     });
 
-    it('should render all the data from the credential', function() {
+    it('should render all the data from the credential', function () {
         let credentialData = [
             {
                 title: "First Name",
@@ -80,7 +80,7 @@ describe('The User Details screen...', function() {
             },
             {
                 title: "Employment Type",
-                data: "Full Time"
+                data: "Full time"
             },
             {
                 title: "End Date",
@@ -100,12 +100,12 @@ describe('The User Details screen...', function() {
                     expect(credentialData[idx].data).to.eql(data);
                 }
                 expect(credentialData[idx].title).to.eql(title);
-                
+
             });
         });
     });
 
-    it('should have a photo', function() {
+    it('should have a photo', function () {
         cy.get('.PictureProfile').should(el => {
             expect(el.attr('src').indexOf('undefined')).to.eql(-1);
         });
@@ -115,7 +115,7 @@ describe('The User Details screen...', function() {
         // cy.get('.export-profile').click();
     });
 
-    it.skip('should export the user data correctly', function() {
+    it.skip('should export the user data correctly', function () {
         // Make sure the data IS different
         expect(initial.stamp === kycData.stamp).to.eql(false);
 

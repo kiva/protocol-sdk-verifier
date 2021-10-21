@@ -1,5 +1,5 @@
-import {CredentialKeyMap} from "./ConfirmationProps";
-import {AuthOption} from "./AuthOptionInterfaces";
+import { CredentialKeyMap } from "./ConfirmationProps";
+import { AuthOption } from "./AuthOptionInterfaces";
 
 export interface Constants {
     verification_options: AuthOption[],
@@ -14,7 +14,8 @@ export interface Constants {
     auth_endpoints?: EndpointsMap,
     phoneIntls?: CountryCodeConfig,
     permittedOpenerOrigins: string[],
-    credentialProof: any
+    credentialProof: any,
+    slowInternetThreshold?: number
 }
 
 export interface MessageMap {

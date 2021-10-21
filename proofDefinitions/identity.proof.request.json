@@ -1,0 +1,126 @@
+{
+    "NumeroIdentidad": {
+        "name": "Numero de Identidad",
+        "rendered": true,
+        "dataType": "text"
+    },
+    "NumInscripcion": {
+        "name": "Numero de Inscripcion",
+        "rendered": true,
+        "dataType": "text"
+    },
+    "Nombres": {
+        "name": "Nombres",
+        "rendered": true,
+        "dataType": "text"
+    },
+    "PrimerApellido": {
+        "name": "Primer Apellido",
+        "rendered": true,
+        "dataType": "text"
+    },
+    "SegundoApellido": {
+        "name": "Segundo Apellido",
+        "rendered": true,
+        "dataType": "text"
+    },
+    "Sexo": {
+        "name": "Sexo",
+        "rendered": true,
+        "dataType": "text"
+    },
+    "FechaDeNacimiento": {
+        "name": "Fecha de Nacimiento",
+        "rendered": true,
+        "dataType": "date"
+    },
+    "EstadoCivil": {
+        "name": "Estado Civil",
+        "rendered": true,
+        "dataType": "text"
+    },
+    "EstadoVivencia": {
+        "name": "Estado Vivencia",
+        "rendered": true,
+        "dataType": "text"
+    },
+    "FechaDeDefuncion": {
+        "name": "Fecha de Defunción",
+        "rendered": true,
+        "dataType": "date"
+    },
+    "CodigoDepartamento": {
+        "name": "Código de Departamento",
+        "rendered": true,
+        "dataType": "text"
+    },
+    "photo~attach": {
+        "name": "Foto",
+        "dataType": "image/jpeg;base64"
+    },
+    "Departamento": {
+        "name": "Departamento",
+        "rendered": true,
+        "dataType": "text"
+    },
+    "CodigoMunicipio": {
+        "name": "Código de Municipio",
+        "rendered": true,
+        "dataType": "text"
+    },
+    "Municipio": {
+        "name": "Municipio",
+        "rendered": true,
+        "dataType": "text"
+    },
+    "CodigoBarrio": {
+        "name": "Código de Barrio",
+        "rendered": true,
+        "dataType": "text"
+    },
+    "Barrio": {
+        "name": "Barrio",
+        "rendered": true,
+        "dataType": "text"
+    },
+    "Nacionalidad": {
+        "name": "Nacionalidad",
+        "rendered": true,
+        "dataType": "text"
+    },
+    "LugarDeNacimiento": {
+        "name": "Lugar de Nacimiento",
+        "rendered": true,
+        "dataType": "text"
+    },
+    "OcupacionLaboral": {
+        "name": "Ocupación Laboral",
+        "rendered": true,
+        "dataType": "text"
+    },
+    "PaisResidencia": {
+        "name": "Pais de Residencia",
+        "rendered": true,
+        "dataType": "text"
+    },
+    "DepartamentoResidencia": {
+        "name": "Departamento de Residencia",
+        "rendered": true,
+        "dataType": "text"
+    },
+    "MunicipioResidencia": {
+        "name": "Municipio de Residencia",
+        "rendered": true,
+        "dataType": "text"
+    },
+    "BarrioResidencia": {
+        "name": "Barrio de Residencia",
+        "rendered": true,
+        "dataType": "text"
+    },
+    "DireccionResidencia": {
+        "name": "Dirección de Residencia",
+        "rendered": true,
+        "dataType": "text"
+    }
+}

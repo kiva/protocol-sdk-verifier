@@ -1,7 +1,8 @@
 import axios from 'axios';
-import {v4 as uuid4} from "uuid";
+import { v4 as uuid4 } from "uuid";
 
-import {CONSTANTS} from "../../constants/constants";
+import { CONSTANTS } from "../../constants/constants";
+import { KYCErrorHandler } from './KYCErrorHandler';
 
 const CancelToken = axios.CancelToken;
 
@@ -49,12 +50,13 @@ export default class GuardianSDK {
             });
             response.data['ekycId'] = ekycId;
             return Promise.resolve(response.data);
-        } catch (error) {
+        } catch (error: any) {
             console.log(error);
-            const errorDetails = ` (${error.response.data.code}: ${error.response.data.message})`;
-            const msg: string = error.message + errorDetails;
-            console.error(error);
-            return Promise.reject(msg);
+            const errorHandler = new KYCErrorHandler({
+                auth_method: this.auth_method
+            });
+            const errorExplanation = errorHandler.explainError(error);
+            return Promise.reject(errorExplanation);
         } finally {
             this.cancel = null;
         }

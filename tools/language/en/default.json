@@ -153,7 +153,8 @@
         "buttons": {
             "exportProfile": "Export Profile",
             "printProfile": "Print Profile"
-        }
+        },
+        "credentialingAgency": "Kiva"
     },
     "Email": {
         "text": {
@@ -205,6 +206,13 @@
         "text": {
             "selectNew": "Select a different digit",
             "leaveFpSelect": "Go Back"
+        }
+    },
+    "SMSOTP": {
+        "text": {
+            "enterPhoneNumber": "Enter the customer's mobile number",
+            "enterOTP": "Enter the 6-digit code",
+            "smsSentTo": "An SMS was sent to"
         }
     }
 }

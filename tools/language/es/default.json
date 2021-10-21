@@ -7,17 +7,118 @@
     "Standard": {
         "back": "Regresar",
         "accept": "Aceptar",
+        "next": "Siguiente",
         "verify": "Verificar",
+        "verifying": "Verificando",
         "continue": "Continuar",
-        "poweredBy": "Desarrollado por"
+        "scanFp": "Escanear huella digital",
+        "poweredBy": "Desarrollado por",
+        "required": "requerido"
+    },
+    "Fingers": {
+        "finger": "dedo",
+        "rightThumb": "Pulgar Derecho",
+        "rightIndex": "Indice Derecho",
+        "rightMiddle": "Mediano Derecho",
+        "rightRing": "Anular Derecho",
+        "rightLittle": "Meñique Derecho",
+        "leftThumb": "Pulgar Izquierdo",
+        "leftIndex": "Indice Izquierdo",
+        "leftMiddle": "Mediano Izquierdo",
+        "leftRing": "Anular Izquierdo",
+        "leftLittle": "Meñique Izquierdo",
+        "rightThumb_full": "{{finger}} Pulgar Derecho",
+        "rightIndex_full": "{{finger}} Indice Derecho",
+        "rightMiddle_full": "{{finger}} Mediano Derecho",
+        "rightRing_full": "{{finger}} Anular Derecho",
+        "rightLittle_full": "{{finger}} Meñique Derecho",
+        "leftThumb_full": "{{finger}} Pulgar Izquierdo",
+        "leftIndex_full": "{{finger}} Indice Izquierdo",
+        "leftMiddle_full": "{{finger}} Mediano Izquierdo",
+        "leftRing_full": "{{finger}} Anular Izquierdo",
+        "leftLittle_full": "{{finger}} Meñique Izquierdo"
+    },
+    "PII": {
+        "nationalId": "Identidad Nacional",
+        "voterId": "Carnet Electoral",
+        "voterIdIssueDate": "Registro de Carnet Electoral",
+        "firstName": "Primer Nombre",
+        "lastName": "Apellidos",
+        "birthDate": "Año de Nacimiento",
+        "job": "Profesion",
+        "phoneNo": "Numero de Telefono",
+        "residentialAddress": "Residencia",
+        "permanentAddress": "Residencia Permanente",
+        "maritalStatus": "Estado Civil",
+        "momsName": "Nombre de Madre",
+        "dadsName_full": "Nombre de Padre",
+        "facePortrait": "Foto de Carnet",
+        "signature": "Firma",
+        "birthPlace": "Lugar de Nacimiento",
+        "firstName_formal": "Nombre",
+        "lastName_formal": "Apellidos",
+        "sex": "Sex"
     },
     "Errors": {
-        "unknownError": "Ha ocurrido un problema.",
+        "unknown": "Ha ocurrido un problema.",
+        "proofs": {
+            "fetchProofsError": "No se pudieron recuperar las opciones de requisitos de verificación disponibles."
+        },
+        "email": {
+            "noInput": "Por favor introduzca su correo electrónico"
+        },
         "qr": {
             "noInviteUrl": "Se produjo un error creando el código QR. Por favor intente de nuevo. Si el problema persiste, comuníquese con su equipo de IT.",
             "connectionError": "Se produjo un error estableciendo una conexión. Por favor intente de nuevo. Si el problema persiste, comuníquese con su equipo de IT.",
             "notConnected": "Por favor escanee el código QR y establezca una conexión antes de verificar.",
-            "noConnectionFound": "Ningún record con el código [ {{connectionId}} ] fue encontrado."
+            "noConnectionFound": "Ningún record con el código [ {{connectionId}} ] fue encontrado.",
+            "rejectedProof": "Verificación fallida: es posible que esta credencial haya sido revocada o que no haya podido cumplir con la solicitud de prueba: \"{{proofRequestComment}}\""
+        },
+        "input": {
+            "nationalIdInput": "El numero de identidad nacional tiene 8 caracteres (mayusculas y numeros)",
+            "voterIdInput": "El carnet de votante tiene siete digitos",
+            "dateInput": "Inserte una fecha correcta",
+            "unsetID": "Debe especificar una identidad nacional",
+            "missingNames": "Debe incluir el nombre completo",
+            "missingFuzzySearchData": "Debe ingresar su fecha de nacimiento, el nombre de la madre o del padre",
+            "inputLength": "Asegurese que la entrada tiene entre {{minimum}} y {{maximum}} caracteres",
+            "invalidOTP": "Proporcione el código de acceso completo de seis dígitos",
+            "missingPhoneNumber": "Por favor ingrese un número de teléfono válido"
+        },
+        "kyc": {
+            "default": "No pudimos completar la petición. Por favor intente de nuevo. Si el problema continua contacte con Soporte Tecnico.",
+            "NetworkAborted": "La peticion no pudo iniciarse. Por favor verifique su conexión de internet e intente de nuevo.",
+            "SDKAccessDenied": "La solicitud no se pudo autenticar. Vuelva a iniciar sesión en su EKYC DesktopTool.",
+            "NoCitizenFound": "Ningún record fue encontrado. Utilice un proceso alternativo de KYC.",
+            "FingerprintNoMatch": "La huella dactilar no coincide con los registros. Por favor, intente nuevamente o use un proceso alternativo de KYC.",
+            "FingerprintSuggestions": "La huella dactilar capturada no coincide con los registros. Por favor, intente nuevamente usando su dedo {{fingers}}.",
+            "FingerprintLowQuality": "La huella dactilar capturada es de muy baja calidad para ser utilizada para la coincidencia. Inténtalo de nuevo.",
+            "FingerprintMissingNotCaptured": "Las huellas dactilares no se capturan en el registro. Utilice un proceso alternativo de KYC.",
+            "FingerprintMissingUnableToPrint": "Las huellas dactilares no se capturan en el registro. Intente con un dedo diferente o use un proceso alternativo de KYC.",
+            "FingerprintMissingAmputation": "Las huellas digitales no se capturan en el registro. Intente con un dedo diferente o use un proceso alternativo de KYC.",
+            "InvalidFilters": "El dedo seleccionado no es compatible con este entorno. Póngase en contacto con su equipo de IT y utilice un proceso alternativo de KYC.",
+            "ServiceError": "Se produjo un error de servicio inesperado. Póngase en contacto con su equipo de IT y utilice un proceso alternativo de KYC.",
+            "InternalServerError": "Se produjo un error de servicio inesperado. Póngase en contacto con su equipo de IT y utilice un proceso alternativo de KYC.",
+            "RegistryConnectionError": "Se produjo un error al conectarse al registro de la NCRA. Por favor intente nuevamente en 5 min.",
+            "InvalidData": "No pudimos verificar la identidad del usuario. Póngase en contacto con su equipo de IT y utilice un proceso alternativo de KYC.",
+            "PDFGenerationError": "Se produjo un error al procesar la información del cliente. Póngase en contacto con su equipo de IT y utilice un proceso alternativo de KYC.",
+            "InvalidDataFormat": "No pudimos verificar los datos proporcionados. Utilice un proceso alternativo de KYC. Si el problema persiste, comuníquese con su equipo de IT.",
+            "NoPhoneNumber": "Es posible que deba actualizar el número de teléfono registrado para completar la autenticación. Intente con otro número o actualice el número de teléfono.",
+            "PhoneNumberNoMatch": "Es posible que deba actualizar el número de teléfono registrado para completar la autenticación. Intente con otro número o actualice el número de teléfono.",
+            "SmsSendFailed": "No se pudo enviar el SMS con el código de acceso de un solo uso. Inténtalo de nuevo.",
+            "OtpNoMatch": "No se pudo autenticar la solicitud. Inténtalo de nuevo.",
+            "OtpExpired": "El código ingresado ha expirado. Inténtalo de nuevo.",
+            "NoRequestNeeded": "La solicitud falló porque este método de autenticación no requiere que se realice una solicitud."
+        },
+        "desktopTool": {
+            "scannerNotFound": "El lector de huellas digitales no se detecta. Asegúrese de que el lector de huellas digitales esté enchufado o desenchufe el dispositivo y luego vuelva a enchufarlo.",
+            "loginFailure": "No has iniciado sesión en la herramienta de escritorio. Asegúrate de haber iniciado sesión.",
+            "deviceInUse": "Una solicitud ya está en progreso. Por favor espere a que se complete la solicitud.",
+            "invalidCredentials": "No pudimos verificar las credenciales del operador. Póngase en contacto con IT para obtener asistencia."
+        },
+        "retries": {
+            "readerNotFound": "El lector de huellas digitales no se detecta, por lo que no puede continuar. Asegúrese de que el lector esté enchufado correctamente.",
+            "readerStillNotFound": "El lector de huellas digitales aún no se pudo detectar. Reinicie la herramienta y la aplicación de escritorio."
         }
     },
     "ConfirmationScreen": {
@@ -33,10 +134,16 @@
             "selectVerification": "Seleccione un método de verificación"
         }
     },
+    "VerificationRequirementScreen": {
+        "verificationRequired": "Verificación requerida",
+        "pleaseSelect": "Seleccione el requisito para verificar las credenciales"
+    },
     "QR": {
         "text": {
+            "clickVerify": "Haga clic en \"Verificar\" para continuar.",
             "retrieving": "Obteniendo su código QR. Por favor sea paciente...",
             "scanQR": "El ciudadano debe escanear el código QR con su billetera móvil.",
+            "scanQRInstructions": "Escanee el código QR con la aplicación de billetera móvil",
             "connected": "¡Conexión establecida! Haga clic en el botón \"Verificar\" a continuación...",
             "resetConnection": "Reiniciar"
         }
@@ -45,6 +152,66 @@
         "buttons": {
             "exportProfile": "Exporte el registro",
             "printProfile": "Imprima el registro"
+        },
+        "credentialingAgency": "Kiva"
+    },
+    "SearchMenuScreen": {
+        "text": {
+            "enterInfo": "Ingrese la identificación del cliente",
+            "unknownId": "No se reconoce la identificación"
+        },
+        "labels": {
+            "enterInput": "Identificación válida",
+            "idOptions": "Opciones de identificación",
+            "nationalIdAbbrev": "IN"
+        }
+    },
+    "AlternateSearchScreen": {
+        "text": {
+            "fuzzySearchInstructions": "Ingrese el nombre y apellido del cliente para buscar la información de identificación. También se necesitará la fecha de nacimiento del cliente, el nombre de la madre o el nombre del padre. Todos los campos también se pueden completar para una búsqueda más fuerte.",
+            "enterFirstAndLast": "Ingrese el cliente {{first}} y {{last}}",
+            "enterDob": "Ingrese la fecha de nacimiento del cliente",
+            "enterParentsNames": "Ingrese el nombre de la madre o del padre",
+            "requiredWithoutDob": "Obligatoria si no se introduce DOB"
+        }
+    },
+    "ScanFingerprintScreen": {
+        "text": {
+            "placeFinger": "Coloque el <strong>{{finger}}</strong> en el lector",
+            "changeFinger": "Usa un dedo diferente",
+            "recaptureFinger": "Recuperar huella digital",
+            "cantUseFinger": "¿El cliente no puede usar huellas dactilares?"
+        }
+    },
+    "FingerSelectionScreen": {
+        "text": {
+            "selectNew": "Selecciona un dígito diferente",
+            "leaveFpSelect": "Regresar"
+        }
+    },
+    "Dialog": {
+        "text": {
+            "idVerified": "Identidad Verificada",
+            "verifying": "Verificando",
+            "slowInternetWarning": "La conexión de internet es lenta. El proceso de verificación puede tomar tiempo más de lo normal."
+        },
+        "buttons": {
+            "tryAgain": "Intente de nuevo",
+            "continue": "Continuar",
+            "exportProfile": "Exporte el registro",
+            "printProfile": "Imprima el registro"
+        }
+    },
+    "Email": {
+        "text": {
+            "instructions": "Por favor introduzca su correo electrónico"
+        }
+    },
+    "SMSOTP": {
+        "text": {
+            "enterPhoneNumber": "Ingrese el número de teléfono móvil del cliente",
+            "enterOTP": "Ingrese el código de 6 dígitos",
+            "smsSentTo": "Se envió un SMS a"
         }
     }
 }

@@ -74,7 +74,7 @@ const messageMap = {
     SMS_SENT_TO: "SMSOTP.text.smsSentTo",
     // Details Screen
     PLACE_OF_BIRTH: "PII.birthPlace",
-    CREDENTIALING_AGENCY: "Details.credentialingAgency",
+    CREDENTIALING_AGENCY: "UserDetails.credentialingAgency",
     // SearchMenu Screen
     ENTER_MESSAGE: "SearchMenuScreen.text.enterInfo",
     ID_OPTIONS: "SearchMenuScreen.labels.idOptions",
